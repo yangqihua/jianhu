@@ -7,17 +7,26 @@ from django.db import models
 
 class Profile(models.Model):
     #####################################
-    uuid = models.CharField(max_length=40)
-    name = models.CharField(max_length=20)
+    uuid = models.CharField(max_length=40, db_index=True)
     nick = models.CharField(max_length=20)
     sex = models.CharField(choices=(('F', 'Female'), ('M', 'Male'), ('O', 'Other')), max_length=1)
-    portrait = models.CharField(max_length=40)
+    portrait = models.CharField(max_length=20)
+    real_name = models.CharField(max_length=20)
+    company_name = models.CharField(max_length=30)
+    job_title = models.CharField(max_length=30)
+    vip = models.BooleanField(default=False)
     #################以上是概要信息部分#####
     create_time = models.DateTimeField()
     update_time = models.DateTimeField()
 
+    class Meta:
+          db_table = "user_profile"
+
+    def __unicode__(self):
+        return self.nick
+
 class ProfileExt(models.Model):
-    user = models.ForeignKey(Profile)
+    user_id = models.IntegerField(db_index=True)
     education = models.CharField(max_length=40)
     nation = models.CharField(max_length=20)
     blood_type = models.CharField(max_length=3)
@@ -29,33 +38,47 @@ class ProfileExt(models.Model):
     create_time = models.DateTimeField()
     update_time = models.DateTimeField()
 
+    class Meta:
+          db_table = "user_profile_ext"
+
 class Bind(models.Model):
-    user = models.ForeignKey(Profile)
-    phone_number = models.CharField(max_length=20)
+    user_id = models.IntegerField(db_index=True)
+    phone_number = models.CharField(max_length=20, db_index=True)
     phone_number_verify_time = models.DateTimeField()
-    wx_openid = models.CharField(max_length=20)
+    wx_openid = models.CharField(max_length=20, db_index=True)
     wx_openid_verify_time = models.DateTimeField()
-    qq_openid = models.CharField(max_length=20)
+    qq_openid = models.CharField(max_length=20, db_index=True)
     qq_openid_verify_time = models.DateTimeField()
-    weibo_openid = models.CharField(max_length=20)
+    weibo_openid = models.CharField(max_length=20, db_index=True)
     weibo_openid_verify_time = models.DateTimeField()
-    email = models.CharField(max_length=40)
+    email = models.CharField(max_length=40, db_index=True)
     email_verify_time = models.DateTimeField()
     create_time = models.DateTimeField()
     update_time = models.DateTimeField()
 
-#
-# type ShareAction struct {
-# 	ShareId     int64
-# 	TopicId     int64
-# 	PreUserId   int64
-# 	NextUserId  int64
-# 	create_time string
-# }
-#
-# type ShareCommunicate struct {
-# 	ShareId     int64
-# 	UserId      int64
-# 	words       string
-# 	create_time string
-# }
+    class Meta:
+          db_table = "user_bind"
+
+class MyCollection(models.Model):
+    user_id = models.IntegerField(db_index=True)
+    job_id = models.IntegerField()
+    create_time = models.DateTimeField()
+
+    class Meta:
+          db_table = "my_collection"
+
+class MyRecommend(models.Model):
+    user_id = models.IntegerField(db_index=True)
+    job_id = models.IntegerField()
+    create_time = models.DateTimeField()
+
+    class Meta:
+          db_table = "my_recommend"
+
+class MyInterview(models.Model):
+    user_id = models.IntegerField(db_index=True)
+    job_id = models.IntegerField()
+    create_time = models.DateTimeField()
+
+    class Meta:
+          db_table = "my_interview"
