@@ -13,7 +13,7 @@ class Profile(models.Model):
     portrait = models.CharField(max_length=20)
     real_name = models.CharField(max_length=20)
     company_name = models.CharField(max_length=30)
-    job_title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
     vip = models.BooleanField(default=False)
     #################以上是概要信息部分#####
     create_time = models.DateTimeField()

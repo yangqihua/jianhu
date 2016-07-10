@@ -63,7 +63,7 @@ class MergeMsg(models.Model):
     words = models.CharField(max_length=120)
     msg_type = models.CharField(choices=(('N', u'正常消息'), ('RR', u'推荐录音消息'), ('JS', u'相关工作状态变更消息'), ), max_length=2)
     create_time = models.DateTimeField()
-    update_time = models.DateTimeField()
+    update_time = models.DateTimeField(db_index=True)
 
     class Meta:
           db_table = "merge_msg"
