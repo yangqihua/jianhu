@@ -2,83 +2,103 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from logic.models import Job
 
 # Create your models here.
 
 class Profile(models.Model):
-    #####################################
-    uuid = models.CharField(max_length=40, db_index=True)
-    nick = models.CharField(max_length=20)
-    sex = models.CharField(choices=(('F', 'Female'), ('M', 'Male'), ('O', 'Other')), max_length=1)
-    portrait = models.CharField(max_length=20)
-    real_name = models.CharField(max_length=20)
-    company_name = models.CharField(max_length=30)
-    title = models.CharField(max_length=30)
-    vip = models.BooleanField(default=False)
-    #################以上是概要信息部分#####
-    create_time = models.DateTimeField()
-    update_time = models.DateTimeField()
+	#####################################
+	uuid = models.CharField(max_length=40, db_index=True)
+	nick = models.CharField(max_length=20)
+	sex = models.CharField(choices=(('F', 'Female'), ('M', 'Male'), ('O', 'Other')), max_length=1)
+	portrait = models.CharField(max_length=20)
+	real_name = models.CharField(max_length=20)
+	company_name = models.CharField(max_length=30)
+	title = models.CharField(max_length=30)
+	vip = models.BooleanField(default=False)
+	#################以上是概要信息部分#####
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
 
-    class Meta:
-          db_table = "user_profile"
+	class Meta:
+		db_table = "user_profile"
 
-    def __unicode__(self):
-        return self.nick
+	def __unicode__(self):
+		return self.nick
+
 
 class ProfileExt(models.Model):
-    user_id = models.IntegerField(db_index=True)
-    education = models.CharField(max_length=40)
-    nation = models.CharField(max_length=20)
-    blood_type = models.CharField(max_length=3)
-    birthday = models.DateField()
-    certificate_no = models.CharField(max_length=40)
-    street = models.CharField(max_length=40)
-    province = models.CharField(max_length=10)
-    city = models.CharField(max_length=20)
-    create_time = models.DateTimeField()
-    update_time = models.DateTimeField()
+	# user_id = models.IntegerField(db_index=True)
+	user = models.OneToOneField(Profile)  # 用户详细信息和用户是一对一的
+	education = models.CharField(max_length=40)
+	nation = models.CharField(max_length=20)
+	blood_type = models.CharField(max_length=3)
+	birthday = models.DateField()
+	certificate_no = models.CharField(max_length=40)
+	street = models.CharField(max_length=40)
+	province = models.CharField(max_length=10)
+	city = models.CharField(max_length=20)
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
 
-    class Meta:
-          db_table = "user_profile_ext"
+	class Meta:
+		db_table = "user_profile_ext"
+
 
 class Bind(models.Model):
-    user_id = models.IntegerField(db_index=True)
-    phone_number = models.CharField(max_length=20, db_index=True)
-    phone_number_verify_time = models.DateTimeField()
-    wx_openid = models.CharField(max_length=20, db_index=True)
-    wx_openid_verify_time = models.DateTimeField()
-    qq_openid = models.CharField(max_length=20, db_index=True)
-    qq_openid_verify_time = models.DateTimeField()
-    weibo_openid = models.CharField(max_length=20, db_index=True)
-    weibo_openid_verify_time = models.DateTimeField()
-    email = models.CharField(max_length=40, db_index=True)
-    email_verify_time = models.DateTimeField()
-    create_time = models.DateTimeField()
-    update_time = models.DateTimeField()
+	# user_id = models.IntegerField(db_index=True)
+	user = models.OneToOneField(Profile)  # 用户绑定信息和用户是一对一的
+	phone_number = models.CharField(max_length=20, db_index=True)
+	phone_number_verify_time = models.DateTimeField()
+	wx_openid = models.CharField(max_length=20, db_index=True)
+	wx_openid_verify_time = models.DateTimeField()
+	qq_openid = models.CharField(max_length=20, db_index=True)
+	qq_openid_verify_time = models.DateTimeField()
+	weibo_openid = models.CharField(max_length=20, db_index=True)
+	weibo_openid_verify_time = models.DateTimeField()
+	email = models.CharField(max_length=40, db_index=True)
+	email_verify_time = models.DateTimeField()
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
 
-    class Meta:
-          db_table = "user_bind"
+	class Meta:
+		db_table = "user_bind"
+
 
 class MyCollection(models.Model):
-    user_id = models.IntegerField(db_index=True)
-    job_id = models.IntegerField()
-    create_time = models.DateTimeField()
+	# user_id = models.IntegerField(db_index=True)
+	# job_id = models.IntegerField()
+	# create_time = models.DateTimeField()
+	#####用户和工作是多对多的关系#####
+	user = models.ForeignKey(Profile)
+	job = models.ForeignKey(Job)
+	create_time = models.DateTimeField()
 
-    class Meta:
-          db_table = "my_collection"
+	class Meta:
+		db_table = "my_collection"
+
 
 class MyRecommend(models.Model):
-    user_id = models.IntegerField(db_index=True)
-    job_id = models.IntegerField()
-    create_time = models.DateTimeField()
+	# user_id = models.IntegerField(db_index=True)
+	# job_id = models.IntegerField()
+	# create_time = models.DateTimeField()
+	#####用户和工作是多对多的关系#####
+	user = models.ForeignKey(Profile)
+	job = models.ForeignKey(Job)
+	create_time = models.DateTimeField()
 
-    class Meta:
-          db_table = "my_recommend"
+	class Meta:
+		db_table = "my_recommend"
+
 
 class MyInterview(models.Model):
-    user_id = models.IntegerField(db_index=True)
-    job_id = models.IntegerField()
-    create_time = models.DateTimeField()
+	# user_id = models.IntegerField(db_index=True)
+	# job_id = models.IntegerField()
+	# create_time = models.DateTimeField()
+	#####用户和工作是多对多的关系#####
+	user = models.ForeignKey(Profile)
+	job = models.ForeignKey(Job)
+	create_time = models.DateTimeField()
 
-    class Meta:
-          db_table = "my_interview"
+	class Meta:
+		db_table = "my_interview"

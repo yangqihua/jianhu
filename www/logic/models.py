@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models
+from user.models import Profile
 
 # Create your models here.
 
 class Job(models.Model):
-    user_id = models.IntegerField(db_index=True)
+    # user_id = models.IntegerField(db_index=True)
+    user = models.ForeignKey(Profile)  # User to Job is One to Many
     company_name = models.CharField(max_length=20)
     job_title = models.CharField(max_length=20)
     work_experience = models.CharField(max_length=10)
@@ -18,18 +21,20 @@ class Job(models.Model):
     create_time = models.DateTimeField()
 
     class Meta:
-          db_table = "job"
+        db_table = "job"
 
     def __unicode__(self):
         return self.job_title
 
+
 class VipJobList(models.Model):
     job = models.ForeignKey(Job)
-    user_id = models.IntegerField()
+    # user_id = models.IntegerField()  #Job 里面已经有user_id了
     create_time = models.DateTimeField()
 
     class Meta:
-          db_table = "job_for_vip_list"
+        db_table = "job_for_vip_list"
+
 
 class Share(models.Model):
     uuid = models.CharField(max_length=40, db_index=True)
@@ -43,17 +48,21 @@ class Share(models.Model):
     update_time = models.DateTimeField()
 
     class Meta:
-          db_table = "job_share"
+        db_table = "job_share"
+
 
 class Conversation(models.Model):
-    share_id = models.IntegerField(db_index=True)
+    # share_id = models.IntegerField(db_index=True)
+    share = models.ForeignKey(Share)
+
     from_userid = models.IntegerField()
     to_userid = models.IntegerField()
     words = models.CharField(max_length=120)
     create_time = models.DateTimeField()
 
     class Meta:
-          db_table = "conversation"
+        db_table = "conversation"
+
 
 class MergeMsg(models.Model):
     userid = models.IntegerField(db_index=True)
@@ -66,4 +75,4 @@ class MergeMsg(models.Model):
     update_time = models.DateTimeField(db_index=True)
 
     class Meta:
-          db_table = "merge_msg"
+        db_table = "merge_msg"
