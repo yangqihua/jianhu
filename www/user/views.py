@@ -5,8 +5,10 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-def test(request):
-    a = request.GET['a']
-    b = request.GET['b']
-    c = int(a)+int(b)
-    return HttpResponse(str(c))
+# 用户关注公众号
+def subscribe(request):
+    pass
+
+# 用户授权访问
+def suthorize(request):
+    pass

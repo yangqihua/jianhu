@@ -5,5 +5,5 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse(u'欢迎访问首页!')
+def ping(request):
+    return HttpResponse(request.GET.get('echo', 'hello'))
