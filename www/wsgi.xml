@@ -1,7 +1,0 @@
-<uwsgi>
-    <socket>:7777</socket>
-    <chdir>/var/jianhu/www</chdir>
-    <module>wsgi</module>
-    <processes>4</processes> <!-- 进程数 --> 
-    <daemonize>www_wsgi.log</daemonize>
-</uwsgi>
