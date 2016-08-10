@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^ping$', views.ping),
 
     url(r'^wx$', wx_views.wx),
-    url(r'^index$', logic_views.index),
+    url(r'^$', logic_views.index),
     url(r'^job/get_job$', logic_views.get_job, name='get_job'),
     url(r'^job/post_job$', logic_views.post_job, name='post_job'),
 ]

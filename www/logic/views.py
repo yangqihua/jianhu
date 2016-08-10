@@ -31,7 +31,13 @@ def index(request):
 
     #ready to render
 
-    return HttpResponse("可以开始渲染了")
+    return HttpResponse("请渲染首页")
+
+def msg(request):
+    return HttpResponse("请渲染消息页")
+
+def home(request):
+    return HttpResponse("请渲染Home页")
 
 def get_job(request):
 
