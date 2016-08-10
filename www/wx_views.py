@@ -8,7 +8,7 @@ from wx_base import handler
 from wx_base.backends.dj import Helper, sns_userinfo
 from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
 
-def do(request):
+def wx(request):
     """公众平台对接"""
     if request.method == "GET":
         signature = request.GET.get("signature", "")
