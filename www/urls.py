@@ -18,6 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 import views
+import wx_views
 from user import views as user_views
 from logic import views as logic_views
 
@@ -26,7 +27,8 @@ urlpatterns = [
 
     url(r'^ping$', views.ping),
 
-    url(r'^$', logic_views.index),
+    url(r'^$', wx_views.do),
+    url(r'^index$', logic_views.index),
     url(r'^job/get_job$', logic_views.get_job, name='get_job'),
     url(r'^job/post_job$', logic_views.post_job, name='post_job'),
 ]

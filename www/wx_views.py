@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 import time
+import logging
+import settings
 from django.shortcuts import HttpResponse, render_to_response
 
-from www.weixin_base import handler
-from www.weixin_base.backends.dj import Helper, sns_userinfo
-from www.weixin_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
+from wx_base import handler
+from wx_base.backends.dj import Helper, sns_userinfo
+from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
 
 def do(request):
     """公众平台对接"""
-    signature = request.REQUEST.get("signature", "")
-    timestamp = request.REQUEST.get("timestamp", "")
-    nonce = request.REQUEST.get("nonce", "")
-    if not any([signature, timestamp, nonce]) or not WeixinHelper.checkSignature(signature, timestamp, nonce):
-        return HttpResponse("check failed")
-
     if request.method == "GET":
+        signature = request.GET.get("signature", "")
+        timestamp = request.GET.get("timestamp", "")
+        nonce = request.GET.get("nonce", "")
+        if not any([signature, timestamp, nonce]) or not WeixinHelper.checkSignature(signature, timestamp, nonce):
+            return HttpResponse("check failed")
         return HttpResponse(request.GET.get("echostr"))
     elif request.method == "POST":
-        #print request.raw_post_data
+        if settings.DEBUG:
+            logging.DEBUG(request.raw_post_data)
         handler = handler.MessageHandle(request.raw_post_data)
         response = handler.start()
         return HttpResponse(response)

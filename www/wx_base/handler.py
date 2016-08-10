@@ -115,8 +115,6 @@ class Reply(object):
         self.xml["ArticleCount"] = count
         return _NEWS.format(**self.xml)
 
-
-
 R = MessageHandle.register
 
 def subscribe(func):
@@ -133,7 +131,6 @@ def click(func):
     """点击事件"""
     R("event", "CLICK", func)
     return func
-
 
 def text(func):
     """文本消息"""
