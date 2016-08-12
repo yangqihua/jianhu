@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>荐乎</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="/static/jquery-weui/dist/lib/weui.css">
+    <link rel="stylesheet" href="/static/jquery-weui/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/static/dist/css/app-me.css">
+</head>
+
+<body>
+<div class="weui_tab">
+    <div class="weui_navbar jian-title">
+        <img src="/static/img/jianhu@2x.png" height="30px" width="52px" style="margin: 7px auto">
+    </div>
+    <!--以 weui_tab_bd 作为外部容器，下拉刷新、滚动加载控件必须在这个容器的之中-->
+    <div class="weui_tab_bd" style="margin-top: -42px;padding-top: 87px">
+        
+    </div>
+
+
+    <div class="weui_tabbar">
+        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-item">
+                <img id="1" class="tab" src="/static/img/btn_nor_faxian@2x.png" width="40px" height="40px">
+            </div>            
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-item">
+                <img id="2" class="tab" src="/static/img/btn_nor_mesaage@2x.png" width="40px" height="40px">
+            </div>            
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-item">
+                <img id="3" class="tab" src="/static/img/btn_pre_wd@2x.png" width="40px" height="40px">
+            </div>            
+        </a>
+    </div>
+</div>
+<script src="/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/jquery-weui/dist/js/jquery-weui.js"></script>
+<script src="/static/dist/js/app-me.js"></script>
+</body>
+</html>
