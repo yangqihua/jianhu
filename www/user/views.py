@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 
 # Create your views here.
 
@@ -12,3 +12,7 @@ def subscribe(request):
 # 用户授权访问
 def suthorize(request):
     pass
+
+
+def me(request):
+	return render_to_response('user/me.html')

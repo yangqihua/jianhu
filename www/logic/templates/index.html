@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>荐乎</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'jquery-weui/dist/lib/weui.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-weui/dist/css/jquery-weui.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/app-index.css' %}">
+</head>
+
+<body>
+<div class="weui_tab">
+    <div class="weui_navbar jian-title">
+        <img src="/static/img/jianhu@2x.png" height="30px" width="52px" style="margin: 7px auto">
+    </div>
+    <!--以 weui_tab_bd 作为外部容器，下拉刷新、滚动加载控件必须在这个容器的之中-->
+    <div class="weui_tab_bd" style="margin-top: -42px;padding-top: 87px">
+        <!--内容区-->
+        <div id="content">
+            <div class="jian_list_items">
+                <!-- item-start -->
+                <div class="jian-item-space"></div>
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <!-- <img src="img/yuan@2x.png" class="jian-item-content-img"> -->
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-me">
+                        <div class="weui-col-33">
+                            <div style="float: left">
+                                <img src="/static/img/default.jpg" class="jian-item-me-img">
+                                <font class="jian-item-me-fontname">我的发布</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-33" style="text-align: center">
+                            <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                        </div>
+                        <div class="weui-col-33" style="text-align: right">
+                            <font class="jian-item-me-fontcompany">三小时前发布</font>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- item-end -->
+                
+
+                <div class="jian-item-space"></div>
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <!-- <img src="img/yuan@2x.png" class="jian-item-content-img"> -->
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-me">
+                        <div class="weui-col-33">
+                            <div style="float: left">
+                                <img src="/static/img/default.jpg" class="jian-item-me-img">
+                                <font class="jian-item-me-fontname">我的发布</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-33" style="text-align: center">
+                            <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                        </div>
+                        <div class="weui-col-33" style="text-align: right">
+                            <font class="jian-item-me-fontcompany">三小时前发布</font>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="jian-item-space"></div>
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <!-- <img src="img/yuan@2x.png" class="jian-item-content-img"> -->
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-me">
+                        <div class="weui-col-33">
+                            <div style="float: left">
+                                <img src="/static/img/default.jpg" class="jian-item-me-img">
+                                <font class="jian-item-me-fontname">我的发布</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-33" style="text-align: center">
+                            <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                        </div>
+                        <div class="weui-col-33" style="text-align: right">
+                            <font class="jian-item-me-fontcompany">三小时前发布</font>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="jian-item-space"></div>
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <!-- <img src="img/yuan@2x.png" class="jian-item-content-img"> -->
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-me">
+                        <div class="weui-col-33">
+                            <div style="float: left">
+                                <img src="/static/img/default.jpg" class="jian-item-me-img">
+                                <font class="jian-item-me-fontname">我的发布</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-33" style="text-align: center">
+                            <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                        </div>
+                        <div class="weui-col-33" style="text-align: right">
+                            <font class="jian-item-me-fontcompany">三小时前发布</font>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="jian-item-space"></div>
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <!-- <img src="img/yuan@2x.png" class="jian-item-content-img"> -->
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-me">
+                        <div class="weui-col-33">
+                            <div style="float: left">
+                                <img src="/static/img/default.jpg" class="jian-item-me-img">
+                                <font class="jian-item-me-fontname">我的发布</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-33" style="text-align: center">
+                            <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                        </div>
+                        <div class="weui-col-33" style="text-align: right">
+                            <font class="jian-item-me-fontcompany">三小时前发布</font>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="jian-item-space"></div>
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <!-- <img src="img/yuan@2x.png" class="jian-item-content-img"> -->
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-me">
+                        <div class="weui-col-33">
+                            <div style="float: left">
+                                <img src="/static/img/default.jpg" class="jian-item-me-img">
+                                <font class="jian-item-me-fontname">我的发布</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-33" style="text-align: center">
+                            <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                        </div>
+                        <div class="weui-col-33" style="text-align: right">
+                            <font class="jian-item-me-fontcompany">三小时前发布</font>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- item-end -->
+            </div>    
+        </div>
+        <!-- content end -->
+        <!--滚动加载控件-->
+        <div class="weui-infinite-scroll">
+            <div class="infinite-preloader"></div>
+            正在加载...
+        </div>
+    </div>
+
+    <div class="jian-fabu-btn">
+        <a href="/job/fabu_job"><img src="/static/img/btn_fabu@2x.png" width="80px" height="80px"></a>
+    </div>
+
+    <div class="weui_tabbar">
+        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-item">
+                <img id="1" class="tab" src="/static/img/btn_pre_faxian@2x.png" width="40px" height="40px">
+            </div>            
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-item">
+                <img id="2" class="tab" src="/static/img/btn_nor_mesaage@2x.png" width="40px" height="40px">
+            </div>            
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-item">
+                <img id="3" class="tab" src="/static/img/btn_nor_wd@2x.png" width="40px" height="40px">
+            </div>            
+        </a>
+    </div>
+</div>
+<script src="/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/jquery-weui/dist/js/jquery-weui.js"></script>
+<script src="/static/dist/js/app-index.js"></script>
+</body>
+</html>

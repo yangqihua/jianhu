@@ -15,20 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 
-from django.conf.urls import url,include
-from django.contrib import admin
+from django.conf.urls import url
 
 import views
 import wx_views
 from user import views as user_views
-from logic import views as logic_views
-import logic
 
-urlpatterns = [url(r'^admin/', admin.site.urls),
-               url(r'^ping$', views.ping),  # 根目录
-               url(r'^$', logic_views.index),   #首页
-               url(r'^wx$', wx_views.wx),               # 微信
-               url(r'^job/', include('logic.urls')),  # 工作相关
-               url(r'^chat/', include('logic.urls')),  # 留言
-               url(r'^user/', include('user.urls')),  # 用户相关
-]
+urlpatterns = [
+               url(r'^me$', user_views.me,name="me"),
+               ]

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>荐乎</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="/static/jquery-weui/dist/lib/weui.css">
+    <link rel="stylesheet" href="/static/jquery-weui/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/static/dist/css/app-chat.css">
+</head>
+
+<body>
+<div class="weui_tab">
+    <div class="weui_navbar jian-title">
+        <a href="javascript:history.back(-1);"><img src="/static/img/back@2x.png" class="jian-title-back"></a>
+        <div class="jian-title-text">
+            与xxx的留言窗
+        </div>
+    </div>
+
+
+    <div class="weui_tab_bd" style="margin-top: -42px;padding-top: 87px;background-color: #ebebeb;">
+        
+            <div class="jian-item-title">
+                <div>
+                    <font class="jian-item-title-font">高级UED工程师</font>
+                </div>
+                
+                <div class="weui-row weui-no-gutter jian-item-content">
+                    <div class="weui-col-50">
+                        <div class="weui-row weui-no-gutter">
+                        <div class="weui-col-50">
+                            <div style="float: left">
+                                <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div style="margin-left: 10px;">
+                                <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="weui-col-50">
+                        <div class="weui-row weui-no-gutter">
+                        <div class="weui-col-50">
+                            <div style="margin-left: 15px;">
+                                <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div style="float: right">
+                                <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui-row weui-no-gutter jian-item-me">
+                    <div class="weui-col-33">
+                        <div style="float: left">
+                            <img src="/static/img/fabuzhe@2x.png" class="jian-item-content-img">
+                            <font class="jian-item-me-fontname">职位发布者</font>
+                        </div>
+                    </div>
+                    <div class="weui-col-33" style="text-align: center">
+                        <font class="jian-item-me-fontcompany">深圳腾讯有限公司</font>
+                    </div>
+                    <div class="weui-col-33">
+                        <div style="float: right">
+                            <img src="/static/img/default.jpg" class="jian-item-me-img">
+                            <font class="jian-item-me-fontname" id="name">叶问陶</font>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- item-end -->
+            <!-- chat begin -->
+            
+            <div class="jian-chat">
+                <div class="jian-chat-liuyan">
+                    <div style="float: left;font-size: 15px;margin: 0 8px;">留言板</div>
+                    <div style="float: left;font-size: 12px;color: #ff9600;">（只供双方一对一留言哦，其他人无法查看）</div>
+                </div>
+                <!-- chat item begin -->
+                <div class="jian-chat-item">
+                    <table width="100%">
+                        <tr>
+                            <td rowspan="2" valign="top" width="40px;">
+                            <img src="/static/img/default1.png" class="jian-chat-img">
+                            </td>
+                            <td>
+                                <div class="jian-chat-name">
+                                    北方的南蛮
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-time">
+                                    2013-06-23 18:23
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                            <div class="jian-chat-content">
+                                你好，我对你发布的职位非常感的职位非常感兴的职位非常感兴的职位非常感兴的职位非常感兴的职位非常感兴兴的职位非常感兴的职位非常感兴的职位非常感兴趣
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- chat item end -->
+
+                <div class="jian-chat-item">
+                    <table width="100%">
+                        <tr>
+                            <td rowspan="2" valign="top" width="40px;">
+                       
+                            <img src="/static/img/default.jpg" class="jian-chat-img">
+                          
+                            </td>
+                            <td>
+                                <div class="jian-chat-name">
+                                    叶问陶
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-time">
+                                    2013-06-23 21:23
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                            <div class="jian-chat-content">
+                                好的，请留一下您的联系方式
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- chat item begin -->
+                <div class="jian-chat-item">
+                    <table width="100%">
+                        <tr>
+                            <td rowspan="2" valign="top" width="40px;">
+                            <img src="/static/img/default1.png" class="jian-chat-img">
+                            </td>
+                            <td>
+                                <div class="jian-chat-name">
+                                    北方的南蛮
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-time">
+                                    2013-06-23 18:23
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                            <div class="jian-chat-content">
+                                你好，我对你发布的职位非常感的职位非常感兴的职位非常感兴的职位非常感兴的职位非常感兴的职位非常感兴兴的职位非常感兴的职位非常感兴的职位非常感兴趣
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- chat item end -->
+
+            </div>
+            <!-- chat end -->
+
+    </div>
+
+
+
+    <div class="chat-textarea">
+        <div class="weui-row weui-no-gutter" style="padding: 6px 16px;">
+            <div class="weui-col-80" style="">
+                    <div class="textarea" id="mesg" contenteditable="true"></div>
+            </div>
+            <div class="weui-col-20">
+                <a href="#">
+                    <div class="jian-huifu">
+                        回复
+                    </div>
+                </a>
+            </div>
+        </div>   
+    </div>         
+</div>
+<script src="/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/jquery-weui/dist/js/jquery-weui.js"></script>
+<script src="/static/dist/js/app-chat.js"></script>
+</body>
+</html>

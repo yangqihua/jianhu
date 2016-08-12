@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>荐乎</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'jquery-weui/dist/lib/weui.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-weui/dist/css/jquery-weui.css' %}">
+    <link rel="stylesheet" href="/static/dist/css/app-job.css">
+</head>
+
+<body>
+<div class="weui_tab">
+    <div class="weui_navbar jian-title">
+        <a href="javascript:history.back(-1);"><img src="/static/img/back@2x.png" class="jian-title-back"></a>
+        <img src="/static/img/jianhu@2x.png" height="30px" width="52px" style="margin: 7px auto">
+        <a href="#">
+        <div style="position: absolute;right: 11px;top: 0;height: 45px;line-height: 45px;font-size: 16px;color: #ffffff;">
+            <span>收藏职位</span>
+        </div>
+        </a>
+    </div>
+    <!--以 weui_tab_bd 作为外部容器，下拉刷新、滚动加载控件必须在这个容器的之中-->
+    <div class="weui_tab_bd" style="margin-top: -42px;padding-top: 87px">
+        <!--内容区-->
+        <div id="content">
+            <div class="jian_list_items">
+                <!-- item-start -->
+                <div class="jian-item-title">
+                    <div>
+                        <font class="jian-item-title-font">高级UED工程师</font>
+                    </div>
+                    
+                    <div class="weui-row weui-no-gutter jian-item-content">
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="float: left">
+                                    <img class="jian-item-content-img" src="/static/img/icn_place@2x.png"><font class="jian-item-content-fontyahei">北京</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="margin-left: 10px;">
+                                    <img src="/static/img/icn_time@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">3-5年</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="weui-col-50">
+                            <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-50">
+                                <div style="margin-left: 15px;">
+                                    <img src="/static/img/icn_xueli@2x.png" class="jian-item-content-img"><font class="jian-item-content-fontyahei">本科</font>
+                                </div>
+                            </div>
+                            <div class="weui-col-50">
+                                <div style="float: right">
+                                    <font class="jian-item-content-fontxinzi">￥10k-15k</font>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter jian-item-skill">
+                        <div class="weui-col-33">
+                            <div style="font-family: 'Yahei Microsoft';color: #8e8e8e;line-height: 1.6em;font-size: 16px;font-weight: bold;">
+                                <font>技能要求</font>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="weui-col-33">
+                            <div class="jian-item-content-hidden" style="text-align: center">
+                                <font>[ 交互ue交互文档 ]</font>
+                            </div>
+                        </div>
+
+                        <div class="weui-col-33">
+                            <div class="jian-item-content-hidden" style="text-align: right">
+                                <font>[ 精通精通JAVA ]</font>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weui-row weui-no-gutter" style="margin-top: 5px;">
+                        <div class="weui-col-33">
+                            <div class="jian-item-content-hidden" style="text-align: left">
+                                <font>[ 交互ue交互文档 ]</font>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="weui-col-33">
+                            <div class="jian-item-content-hidden" style="text-align: center">
+                                <font>[ 基本基本ui设计 ]</font>
+                            </div>
+                        </div>
+
+                        <div class="weui-col-33">
+                            <div class="jian-item-content-hidden" style="text-align: right">
+                                <font>[ 精通精通精通精通 ]</font>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- item-end -->
+
+                <div class="jian-item-space">
+                    <span style="margin-left: 15px;">职位发布者</span>
+                </div>
+
+                <div class="weui-row weui-no-gutter jian-item-me" style="margin-top: ">
+                    <div class="weui-col-33">
+                        <img src="/static/img/default.jpg" class="jian-item-me-img"><font class="jian-item-me-fontname">叶问涛</font>
+                    </div>
+
+                    <div class="weui-col-33">
+                        <div class="jian-item-me-company" >
+                            <font>深圳腾讯科技有限公司</font>
+                        </div>
+                    </div>
+
+                    <div class="weui-col-33">
+                        <a href="#">
+                            <div class="jian-item-me-zhiwei">
+                                <font>共发布20个职位 ></font>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="jian-item-space">
+                    <span style="margin-left: 15px;">办公环境</span>
+                </div>
+                
+                <div id="img-view" style="margin: 15px;">
+                    <div style="width: 100%">
+                        <img src="/static/img/tencent1.jpg" width="100%">
+                    </div>
+
+                    <div style="width: 100%;margin-top: 10px;">
+                        <img src="/static/img/tencent2.jpg" width="100%">
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <!-- content end -->
+        <!--滚动加载控件-->
+        <div class="weui-infinite-scroll" id="load-more">
+            <div class="infinite-preloader"></div>
+            正在加载...
+        </div>
+    </div>
+
+    <div class="weui_tabbar">
+        <a href="chat" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-xingqu">
+                <span style="margin-top: 14px;">我感兴趣</span>
+            </div>            
+        </a>
+        <a href="recommand_job" class="weui_tabbar_item" style="padding-top: 0">
+            <div class="jian-tabbar-friend">
+                <span style="margin-top: 14px;">推荐好友</span>
+            </div>            
+        </a>
+        
+    </div>
+</div>
+<script src="/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/static/jquery-weui/dist/js/jquery-weui.js"></script>
+<script src="/static/dist/js/app-job.js"></script>
+</body>
+</html>
