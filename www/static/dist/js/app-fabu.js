@@ -32,7 +32,7 @@ Query.find(expr),跟jQuery.filter(expr)完全不一样。jQuery.filter()是从�
 // });
 
 // var skills = [];
-// skills[1] = '<img src="/static/img/add@2x.png" height="16px">';
+// skills[1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
 //编辑技能
 $(".weui-row").on('click','.jian-form-edit-btn', function(event) {
 
@@ -85,7 +85,7 @@ $(".weui-row").on('click','.jian-skill-clear', function(event) {
 		}
 		if (!$('#6').text().trim()=='') {
 			if (i==6) {
-				$('#6').html('<img src="/static/img/add@2x.png" height="16px">').addClass('jian-add-skill');
+				$('#6').html('<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">').addClass('jian-add-skill');
 				$('#6').next().remove();
 			}else{
 				$('#'+i).html($('#'+(i+1)).html());
@@ -121,11 +121,11 @@ $(".weui-row").on('click','.jian-add-skill', function(event) {
 	      		}
 	      		_this.html(_text);
 	      		// skills[curr_id] = _this.parent().html();
-	      		// skills[curr_id+1] = '<img src="/static/img/add@2x.png" height="16px">';
+	      		// skills[curr_id+1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
 	      		if(_this.html().trim()==''){
 	      			alert($(event.target));
 	      		}
-	      		_this.after('<img src="/static/img/close@2x.png" class="jian-skill-clear">');
+	      		_this.after('<img src="http://res.jian-hu.cn/static/img/close@2x.png" class="jian-skill-clear">');
 	      	}
 	    }, function() {
 	      //取消操作

@@ -8,7 +8,7 @@ $('.weui_tab_bd').infinite().on("infinite", function () {
         $('#load-more').html("∩_∩ 暂无更多图片")
         return
     };
-    var jian_item = '<div style="width: 100%;margin-top: 10px;"><img src="/static/img/tencent'+id+'.jpg" width="100%"></div>'
+    var jian_item = '<div style="width: 100%;margin-top: 10px;"><img src="http://res.jian-hu.cn/static/img/tencent'+id+'.jpg" width="100%"></div>'
     if (loading) return;
     loading = true;
     setTimeout(function () {
