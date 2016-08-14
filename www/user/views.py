@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#from django.db import transaction
 from django.shortcuts import render,render_to_response
 
 # Create your views here.
@@ -6,6 +7,10 @@ from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
 from common.string import gen_uuid
 
+from user.models import Bind, Profile, ProfileExt
+
+import logging
+import datetime
 
 # 用户关注公众号
 def subscribe(openid, uninid):
@@ -18,6 +23,7 @@ def unsubscribe(openid, uninid):
 
 
 # 从腾讯获取用户数据的回调, 存储到数据库中
+#@transaction.commit_on_success
 def fetch_user_info_callback(openid, userinfo):
     exist = Bind.objects.filter(wx_openid=openid)
     if not exist:
@@ -32,10 +38,10 @@ def fetch_user_info_callback(openid, userinfo):
         profile = Profile(uuid=gen_uuid(), nick=userinfo['nickname'], sex=sex, portrait=userinfo['headimgurl'], real_name='', company_name='', title='', vip='')
         profile.save()
 
-        bind = Bind(user_id=profile.id, phone_number='', phone_number_verify_time='0000-00-00', wx_openid=openid, wx_openid_verify_time=datetime.now(), wx_subscribed=0, qq_openid='', qq_openid_verify_time='0000-00-00', weibo_openid='', weibo_openid_verify_time='0000-00-00', email='', email_verify_time='0000-00-00')
+        bind = Bind(user_id=profile.id, phone_number='', phone_number_verify_time='1972-01-01', wx_openid=openid, wx_openid_verify_time=datetime.datetime.now(), wx_subscribed=0, qq_openid='', qq_openid_verify_time='1972-01-01', weibo_openid='', weibo_openid_verify_time='1972-01-01', email='', email_verify_time='1972-01-01')
         bind.save()
 
-        profileext = ProfileExt(user_id=profile.id, education='', nation=userinfo['country'], blood_type='', birthday='', certificate_no='', street='', province=userinfo['province'], city=userinfo['city'])
+        profileext = ProfileExt(user_id=profile.id, education='', nation=userinfo['country'], blood_type='', birthday='1972-01-01', certificate_no='', street='', province=userinfo['province'], city=userinfo['city'])
         profileext.save()
     else:
         logging.debug('exist userinfo: %s' % openid)
