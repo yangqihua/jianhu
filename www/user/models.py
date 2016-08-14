@@ -10,7 +10,7 @@ class Profile(models.Model):
     uuid = models.CharField(max_length=36, db_index=True)
     nick = models.CharField(max_length=20)
     sex = models.CharField(choices=(('F', 'Female'), ('M', 'Male'), ('O', 'Other')), max_length=1)
-    portrait = models.CharField(max_length=20)
+    portrait = models.CharField(max_length=256)
     real_name = models.CharField(max_length=20)
     company_name = models.CharField(max_length=30)
     title = models.CharField(max_length=30)
@@ -47,7 +47,7 @@ class Bind(models.Model):
     user_id = models.IntegerField(db_index=True)
     phone_number = models.CharField(max_length=20, db_index=True)
     phone_number_verify_time = models.DateTimeField()
-    wx_openid = models.CharField(max_length=20, db_index=True)
+    wx_openid = models.CharField(max_length=36, db_index=True)
     wx_openid_verify_time = models.DateTimeField() #如果只是授权没有关注，则该值为0000-00-00，订阅状态为false；如果是取消关注，则该值为注册时间，未关注
     wx_subscribed = models.BooleanField(default=False)
     qq_openid = models.CharField(max_length=20, db_index=True)
