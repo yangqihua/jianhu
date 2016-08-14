@@ -17,6 +17,12 @@ class WxPayConf_pub(object):
 	#接口配置token
 	TOKEN = "E2AE0CFFDD6A43B4B5D40FED01D29736"
 
+	#=======【curl超时设置】===================================
+	CURL_TIMEOUT = 30
+
+	#=======【HTTP客户端设置】===================================
+	HTTP_CLIENT = "CURL"  # ("URLLIB", "CURL", "REQUESTS")
+
 
 	#下面的配置没有申请到
 	#受理商ID，身份标识
@@ -33,11 +39,6 @@ class WxPayConf_pub(object):
 	#证书路径,注意应该填写绝对路径
 	SSLCERT_PATH = "/******/cacert/apiclient_cert.pem"
 	SSLKEY_PATH = "/******/cacert/apiclient_key.pem"
-
-	#=======【curl超时设置】===================================
-	CURL_TIMEOUT = 30
-
-	#=======【HTTP客户端设置】===================================
-	HTTP_CLIENT = "CURL"  # ("URLLIB", "CURL", "REQUESTS")
+	
 
 

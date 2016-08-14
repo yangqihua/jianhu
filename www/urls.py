@@ -25,10 +25,11 @@ from logic import views as logic_views
 import logic
 
 urlpatterns = [url(r'^admin/', admin.site.urls),
-               url(r'^ping$', views.ping),  # 根目录
-               url(r'^$', logic_views.index),   #首页
-               url(r'^wx$', wx_views.wx),               # 微信
-               url(r'^job/', include('logic.urls')),  # 工作相关
-               url(r'^chat/', include('logic.urls')),  # 留言
+               url(r'^ping$', views.ping),  # 测试
+               url(r'^$', logic_views.index), # 首页
+               url(r'^wx_io$', wx_views.wx_io), # 微信消息、事件接口
+               url(r'^openid$', wx_views.oauth), # 获取用户的openid
+               url(r'^job/', include('logic.urls')), # 工作相关
+               url(r'^chat/', include('logic.urls')), # 留言
                url(r'^user/', include('user.urls')),  # 用户相关
 ]
