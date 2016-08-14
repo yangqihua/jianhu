@@ -62,10 +62,16 @@ def sns_userinfo_callback(callback=None):
                 ok, openid = Helper.check_cookie(openid)
                 if not ok:
                     return redirect("/")
+
             request.openid = openid
-            if callable(callback):
+            if callable(callback) and userinfo:
                 request.user = callback(openid, userinfo)
+
             response = func(request)
+
+            if userinfo:
+                response.set_cookie("openid", Helper.sign_cookie(request.openid))
+
             return response
         return inner
     return wrap

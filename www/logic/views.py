@@ -6,8 +6,8 @@ from common import convert
 from django.http import HttpResponse
 from models import Job, VipJobList
 
-import uuid
 import logging
+from common.string import gen_uuid
 
 from user.views import fetch_user_info_callback
 from wx_base.backends.dj import sns_userinfo_callback
@@ -72,9 +72,8 @@ def post_job(request):
 	piclist = request.POST.get('piclist')
 
 	user_id = 1  # get userid from session
-	uuid = uuid.uuid3(uuid.NAMESPACE_DNS, 'jianhu-www')
 
-	job = Job(uuid=uuid, user_id=user_id, company_name=company_name, job_title=job_title,
+	job = Job(uuid=gen_uuid(), user_id=user_id, company_name=company_name, job_title=job_title,
 		work_experience=work_experience, salary=salary, education=education, city=city, skill=skill, piclist=piclist)
 	job.save()
 
