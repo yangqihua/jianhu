@@ -8,27 +8,7 @@ from wx_base import handler
 from wx_base.backends.dj import Helper, sns_userinfo
 from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
 
-
-def do(request):
-	"""公众平台对接"""
-	signature = request.REQUEST.get("signature", "")
-	timestamp = request.REQUEST.get("timestamp", "")
-	nonce = request.REQUEST.get("nonce", "")
-	if not any([signature, timestamp, nonce]) or not WeixinHelper.checkSignature(signature, timestamp, nonce):
-		return HttpResponse("check failed")
-
-	if request.method == "GET":
-		return HttpResponse(request.GET.get("echostr"))
-	elif request.method == "POST":
-		# print request.raw_post_data
-		handler = handler.MessageHandle(request.raw_post_data)
-		response = handler.start()
-		return HttpResponse(response)
-	else:
-		return HttpResponse("")
-
-
-def wx(request):
+def wx_io(request):
 	"""公众平台对接"""
 	if request.method == "GET":
 		signature = request.GET.get("signature", "")
@@ -49,15 +29,15 @@ def wx(request):
 
 @handler.subscribe
 def subscribe(xml):
-	return "welcome to brain"
+	return "谢谢订阅，我们应该把信息存储到数据库中： %s" % str(xml)
 
 
 @handler.unsubscribe
 def subscribe(xml):
-	print "leave"
-	return "leave  brain"
+	return "leave brain 取消订阅，我们应该在数据库中体现该事件"
 
 
+#用户发送文本消息到服务器，我们需求进行对接多客服
 @handler.text
 def text(xml):
 	content = xml.Content
@@ -77,6 +57,7 @@ def text(xml):
 	return "hello world"
 
 
+#加密太简单，要加强这块 －－ 以后注意要修改！！！ guohw
 @sns_userinfo
 def oauth(request):
 	"""网页授权获取用户信息"""
@@ -130,6 +111,7 @@ def paydetail(request):
 		return HttpResponse(jsApiParameters)
 
 
+
 FAIL, SUCCESS = "FAIL", "SUCCESS"
 
 
@@ -163,19 +145,4 @@ def payback(request):
 		###检查订单号是否已存在,以及业务代码(业务代码注意重入问题)
 
 	return HttpResponse(notify.returnXml())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

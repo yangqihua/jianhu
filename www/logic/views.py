@@ -9,7 +9,11 @@ from models import Job, VipJobList
 import uuid
 import logging
 
-# 暂时忽略权限问题
+from user.views import fetch_user_info_callback
+from wx_base.backends.dj import sns_userinfo_callback
+sns_userinfo_with_userinfo = sns_userinfo_callback(fetch_user_info_callback)
+
+@sns_userinfo_with_userinfo
 def index(request):
 	uid = 1  # get uid from session
 
@@ -33,14 +37,15 @@ def index(request):
 	# return HttpResponse("请渲染首页")
 	return render_to_response('index.html')
 
+@sns_userinfo_with_userinfo
 def msg(request):
 	return render_to_response('chat/mesg.html')
 
-
+@sns_userinfo_with_userinfo
 def home(request):
 	return HttpResponse("请渲染Home页")
 
-
+@sns_userinfo_with_userinfo
 def get_job(request):
 	uid = 1  # get uid from session
 
@@ -55,7 +60,7 @@ def get_job(request):
 
 	return render_to_response('job/job_detail.html')
 
-
+@sns_userinfo_with_userinfo
 def post_job(request):
 	company_name = request.POST.get('company_name')
 	job_title = request.POST.get('job_title')
@@ -81,15 +86,18 @@ def post_job(request):
 
 	return render_to_response('job/job_fabu.html')
 
+@sns_userinfo_with_userinfo
 def post_job_success(request):
 	return render_to_response('job/job_success.html')
 
-
+@sns_userinfo_with_userinfo
 def fabu_job(request):
 	return render_to_response('job/job_fabu.html')
 
+@sns_userinfo_with_userinfo
 def recommand_job(request):
 	return render_to_response('job/job_recommand.html')
 
+@sns_userinfo_with_userinfo
 def chat(request):
 	return render_to_response('chat/chat.html')

@@ -48,7 +48,8 @@ class Bind(models.Model):
     phone_number = models.CharField(max_length=20, db_index=True)
     phone_number_verify_time = models.DateTimeField()
     wx_openid = models.CharField(max_length=20, db_index=True)
-    wx_openid_verify_time = models.DateTimeField()
+    wx_openid_verify_time = models.DateTimeField() #如果只是授权没有关注，则该值为0000-00-00，订阅状态为false；如果是取消关注，则该值为注册时间，未关注
+    wx_subscribed = models.BooleanField(default=False)
     qq_openid = models.CharField(max_length=20, db_index=True)
     qq_openid_verify_time = models.DateTimeField()
     weibo_openid = models.CharField(max_length=20, db_index=True)

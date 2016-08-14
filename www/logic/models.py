@@ -30,14 +30,15 @@ class Job(models.Model):
 
 class VipJobList(models.Model):
     job_id = models.IntegerField(db_index=True)
-    create_time = models.DateTimeField(db_index=True, auto_now_add=True)
+    user_id = models.IntegerField(unique=True) #一个用户在该表中只能存一条
+    pub_time = models.DateTimeField(db_index=True, auto_now_add=True)
 
     class Meta:
         db_table = "job_for_vip_list"
 
 
 class Share(models.Model):
-    uuid = models.CharField(max_length=36, db_index=True)
+    share_uuid = models.CharField(max_length=36, db_index=True)
     from_user_id = models.IntegerField(db_index=True)
     to_user_id = models.IntegerField(db_index=True)
     job = models.ForeignKey(Job)
@@ -53,9 +54,7 @@ class Share(models.Model):
 
 class Conversation(models.Model):
     share_id = models.IntegerField(db_index=True)
-
-    from_user_id = models.IntegerField()
-    to_user_id = models.IntegerField()
+    user_id = models.IntegerField()
     words = models.CharField(max_length=120)
     create_time = models.DateTimeField(auto_now_add=True)
 
@@ -75,3 +74,4 @@ class MergeMsg(models.Model):
 
     class Meta:
         db_table = "merge_msg"
+

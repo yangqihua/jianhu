@@ -34,7 +34,6 @@ class Helper(CommonHelper):
         return settings.SECRET_KEY
 
 
-
 def sns_userinfo_callback(callback=None):
     """网页授权获取用户信息装饰器
     callback(openid, userinfo):
@@ -49,14 +48,17 @@ def sns_userinfo_callback(callback=None):
             if not openid:
                 code = request.GET.get("code")
                 if not code:
+                    #进入授权环节，这里的默认都是使用获取用户资料的方式
                     current = "http://"+ request.get_host() + request.get_full_path()
                     return redirect(WeixinHelper.oauth2(current))
                 else:
+                    #这里未考虑网络异常情况
                     data = json.loads(WeixinHelper.getAccessTokenByCode(code))
                     access_token, openid, refresh_token = data["access_token"], data["openid"], data["refresh_token"]
                     #WeixinHelper.refreshAccessToken(refresh_token)
                     userinfo = json.loads(WeixinHelper.getSnsapiUserInfo(access_token, openid))
             else:
+                #通过opendid来判断，是否有不安全的因素？
                 ok, openid = Helper.check_cookie(openid)
                 if not ok:
                     return redirect("/")
@@ -69,14 +71,6 @@ def sns_userinfo_callback(callback=None):
     return wrap
 
 sns_userinfo = sns_userinfo_callback()
-
-
-
-
-
-
-
-
 
 
 
