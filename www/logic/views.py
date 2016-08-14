@@ -18,23 +18,22 @@ def index(request):
 	uid = 1  # get uid from session
 
 	vip_job_from_point = convert.str_to_int(request.GET.get('from', '0'), 0)  # 有from时，则为翻页，无时，则为首页
-	number_limit = convert.str_to_int(request.GET.get('limit', '5'), 5)  # 异常情况下，或者不传的情况下，默认为5
+	number_limit = convert.str_to_int(request.GET.get('limit', '10'), 10)  # 异常情况下，或者不传的情况下，默认为10
 
 	# 取本人发布过的，并且有效的简历
 	if vip_job_from_point != 0:
 		own_jobs = []
 	else:
-		own_jobs = Job.objects.filter(id=uid).order_by('-id')[0:5]
+		own_jobs = Job.objects.filter(id=uid).order_by('-id')[0:1]
 
 	# 按发布时间去取VIP发布简历 －－ 以后从缓存中取
-	vip_jobs = VipJobList.objects.all()[0:10]
+	vip_jobs = VipJobList.objects.all()[vip_job_from_point:number_limit]
 	job_id_list = [job.job_id for job in vip_jobs]
 
 	vip_jobs = Job.objects.filter(id__in=job_id_list)
 
 	# ready to render
 
-	# return HttpResponse("请渲染首页")
 	return render_to_response('index.html')
 
 @sns_userinfo_with_userinfo
