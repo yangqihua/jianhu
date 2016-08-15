@@ -2,4 +2,6 @@ settings.py
 *.pyc
 *.xml
 
+log/
+
 www/*.pyc
