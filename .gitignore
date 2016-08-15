@@ -4,4 +4,5 @@ settings.py
 
 log/
 
+www/.idea/
 www/*.pyc
