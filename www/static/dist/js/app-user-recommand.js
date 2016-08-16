@@ -1,3 +1,4 @@
+       
 
 var loading = false;  //状态标记
 $('.weui_tab_bd').infinite();
@@ -15,4 +16,12 @@ $('.weui_tab_bd').infinite().on("infinite", function () {
         $("#img-view").append(jian_item).append(jian_item);
         loading = false;
     }, 1500);   //模拟延迟
+});
+
+
+$('.jian-my-luyin').on('click', function(event) {
+    var _this = $(event.target);
+    var img = _this.find('#play');
+    // console.log(img);
+    img.attr('src', 'http://res.jian-hu.cn/static/img/say@2x.gif');
 });

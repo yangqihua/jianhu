@@ -33,7 +33,7 @@ $('.jian-fasong-btn').on('click', function(event) {
 $('#luyin1').on('click', function(event) {
 	  var _this = $(event.target);
     //1.更新点击录音图片，实现360度旋转
-    _this.attr('src', 'http://res.jian-hu.cn/static/img/loading.gif');
+    _this.attr('src', 'http://res.jian-hu.cn/static/img/luyinzhong@3x.gif');
     //2.更新点击开始录音文本
     var second = 2;
     _this.parent().parent().parent().prev().html('已录 <font style="color: #ff9600;">'+second+'</font> 秒');
@@ -47,7 +47,7 @@ $('#luyin1').on('click', function(event) {
 $('#luyin2').on('click', function(event) {
     var _this = $(event.target);
     //1.更新点击录音图片，实现360度旋转
-    _this.attr('src', 'http://res.jian-hu.cn/static/img/loading.gif');
+    _this.attr('src', 'http://res.jian-hu.cn/static/img/luyinzhong@3x.gif');
     //2.更新点击开始录音文本
     var second = 2;
     _this.parent().parent().parent().prev().html('已录 <font style="color: #ff9600;">'+second+'</font> 秒');
