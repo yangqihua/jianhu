@@ -1,28 +1,11 @@
-$('.tab').on('click', function(event) {
-    // event.preventDefault();
-    var id = this.id;
-    // alert(id)
-    switch(id){
-        case '1':
-            // location.href = "../index.html";
-            break;
-        case '2':             
-            location.href = "/chat/msg";
-            break;
-        case '3':                
-            location.href = "/user/me";
-            break;
-    }
-
-});
 
 $('.jian-item-title').on('click',function(event){
     // alert('1111');
-    location.href = "/job/get_job";
+    location.href = "/chat/chat";
 });         
 
 item_count = $('.jian_list_items').children().length/2;
-if(item_count>=6){        //元素个数大于这个值才启用滚到加载组件
+if(item_count>=5){        //元素个数大于这个值才启用滚到加载组件
     var loading = false;  //状态标记
     $('.weui_tab_bd').infinite();
     // $('.weui_tab_bd').destroyInfinite();

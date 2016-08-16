@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>荐乎</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    {% load staticfiles %}
     <link rel="stylesheet" href="http://res.jian-hu.cn/static/jquery-weui/dist/lib/weui.css">
     <link rel="stylesheet" href="http://res.jian-hu.cn/static/jquery-weui/dist/css/jquery-weui.css">
     <link rel="stylesheet" href="http://res.jian-hu.cn/static/dist/css/app-fabu.css">
@@ -36,7 +35,7 @@
             </div>
             
             <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
-                <div class="weui_cell_hd" style="width: 141px;"><label class="weui_label">工作经验</label></div>
+                <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">工作经验</label></div>
                 <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
                     <select class="weui_select" name="select1" style="padding-left: 0;color: #8e8e8e;">
                         <option selected="true" value="1">不限</option>
@@ -48,7 +47,7 @@
             </div>
 
             <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
-                <div class="weui_cell_hd" style="width: 141px;"><label class="weui_label">薪资范围</label></div>
+                <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">薪资范围</label></div>
                 <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
                     <select class="weui_select" name="select1" style="padding-left: 0;color: #8e8e8e;">
                         <option selected="true" value="1">3k-5k</option>
@@ -61,7 +60,7 @@
             </div>
 
             <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
-                <div class="weui_cell_hd" style="width: 141px;"><label class="weui_label">学历</label></div>
+                <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">学历</label></div>
                 <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
                     <select class="weui_select" name="select1" style="padding-left: 0;color: #8e8e8e;">
                         <option selected="true" value="1">不限</option>
@@ -149,31 +148,47 @@
             <div class="jian-item-space"></div>
             <!-- upload-img start 2016-7-21 22:27:34 in Pearl`s Hill of Singapore -->
             
-            <div class="weui_cell" style="padding:15px;">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <div class="weui_uploader">
-                        <div class="weui_uploader_hd weui_cell">
-                            <div class="weui_cell_bd" style="font-size: 16px;line-height: 28px;margin-bottom: 10px;">图片上传</div>
-                        </div>
-                        <div class="weui_uploader_bd">
-                            <ul class="weui_uploader_files">
-                            <!-- <div style="padding: 8px 10px 0 0;position: relative;"> -->
-                            <li class="weui_uploader_file jian-upload-img"></li>
-                            <!-- </div> -->
-                            <li class="weui_uploader_file jian-upload-img"></li>
-                            <li class="weui_uploader_file jian-upload-img"></li>
-                            <li class="weui_uploader_file jian-upload-img"></li>
-                            
-                            <li class="weui_uploader_file weui_uploader_status jian-upload-img">
-                                <div class="weui_uploader_status_content">50%</div>
-                            </li>
-                            </ul>
-                            <div class="weui_uploader_input_wrp">
-                            <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
-                            </div>
+            <div class="weui_cell_bd" style="padding:15px;">
+                <div class="weui_uploader_hd weui_cell">
+                    <div class="weui_cell_bd" style="font-size: 16px;line-height: 28px;margin-bottom: 10px;">图片上传</div>
+                </div>
+                    <!-- <ul class="weui_uploader_files">
+                    <li class="weui_uploader_file jian-upload-img"></li>
+                    <li class="weui_uploader_file jian-upload-img"></li>
+                    <li class="weui_uploader_file jian-upload-img"></li>
+                    <li class="weui_uploader_file jian-upload-img"></li>
+                    <li class="weui_uploader_file weui_uploader_status jian-upload-img">
+                        <div class="weui_uploader_status_content">50%</div>
+                    </li>
+                    </ul> -->
+                <div class="weui-row" style="overflow: hidden;">
+                    <div class="weui-col-33 imgdiv">
+                        <img src="http://res.jian-hu.cn/static/img/tencent2.jpg" >
+                    </div>
+                    <div class="weui-col-33 imgdiv">
+                        <img src="http://res.jian-hu.cn/static/img/tencent5.jpg" >
+                    </div>
+                    <div class="weui-col-33 imgdiv">
+                        <img src="http://res.jian-hu.cn/static/img/tencent4.jpg" >
+                    </div>
+                </div>
+
+                <div class="weui-row" style="overflow: hidden;margin-top: 10px;">
+                    <div class="weui-col-33 imgdiv">
+                        <img src="http://res.jian-hu.cn/static/img/tencent3.jpg" >
+                    </div>
+                    <div class="weui-col-33 imgdiv">
+                        <img src="http://res.jian-hu.cn/static/img/tencent1.jpg" >
+                    </div>
+                    <div class="weui-col-33 imgdiv">
+                        <div class="weui_uploader_input_wrp" style="margin:0">
+                        <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
                         </div>
                     </div>
                 </div>
+                    <!-- <div class="weui_uploader_input_wrp">
+                    <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+                    </div> -->
             </div>
            
         <!-- upload-img end 2016-7-21 22:27:34 in Pearl`s Hill of Singapore -->

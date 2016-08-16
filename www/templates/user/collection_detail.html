@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <title>荐乎</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'jquery-weui/dist/lib/weui.css' %}">
-    <link rel="stylesheet" href="{% static 'jquery-weui/dist/css/jquery-weui.css' %}">
+    <link rel="stylesheet" href="http://res.jian-hu.cn/static/jquery-weui/dist/lib/weui.css">
+    <link rel="stylesheet" href="http://res.jian-hu.cn/static/jquery-weui/dist/css/jquery-weui.css">
     <link rel="stylesheet" href="http://res.jian-hu.cn/static/dist/css/app-job.css">
 </head>
 
@@ -14,11 +13,10 @@
 <div class="weui_tab">
     <div class="weui_navbar jian-title">
         <a href="javascript:history.back(-1);"><img src="http://res.jian-hu.cn/static/img/back@2x.png" class="jian-title-back"></a>
-        <img src="http://res.jian-hu.cn/static/img/jianhu@2x.png" height="30px" width="52px" style="margin: 7px auto">
-        <a href="#">
-        <div style="position: absolute;right: 11px;top: 0;height: 45px;line-height: 45px;font-size: 16px;color: #ffffff;">
-            <span>收藏职位</span>
+        <div class="jian-title-text">
+            职位详情
         </div>
+        
         </a>
     </div>
     <!--以 weui_tab_bd 作为外部容器，下拉刷新、滚动加载控件必须在这个容器的之中-->
@@ -156,12 +154,12 @@
     </div>
 
     <div class="weui_tabbar">
-        <a href="chat" class="weui_tabbar_item" style="padding-top: 0">
+        <a href="/chat/chat" class="weui_tabbar_item" style="padding-top: 0">
             <div class="jian-tabbar-xingqu">
                 <span style="margin-top: 14px;">我感兴趣</span>
             </div>            
         </a>
-        <a href="recommand_job" class="weui_tabbar_item" style="padding-top: 0">
+        <a href="/job/recommand_job" class="weui_tabbar_item" style="padding-top: 0">
             <div class="jian-tabbar-friend">
                 <span style="margin-top: 14px;">推荐好友</span>
             </div>            

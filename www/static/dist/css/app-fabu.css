@@ -140,6 +140,12 @@ html, body {
 	line-height: 48px;
 }
 
+.imgdiv{
+	margin-left: 10px;
+	/*padding:8px;*/
+	overflow: hidden;
+}
+
 
 
 

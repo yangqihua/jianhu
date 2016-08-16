@@ -99,39 +99,43 @@ $(".weui-row").on('click','.jian-skill-clear', function(event) {
 
 //给动态添加的元素添加事件要使用委托
 $(".weui-row").on('click','.jian-add-skill', function(event) {
-	// alert($('.jian-form-edit-btn').html());
 	var _this = $(event.target);
 	if (_this.attr('id') === undefined) { //如果点击的是'.jian-add-skill'的子元素，也就是+这个符号
 		_this = _this.parent();
 	};
-	console.log($(event.target));
 	if($('.jian-form-edit-btn').text()=='确定'){
 		$.alert("请先确定!");
 	}else{
-		
-		$.prompt("技能要求不能超过16个字符(一个汉字等于两个字符)", "输入技能要求", function(_text) {
-	      	if(!isLimit(_text, 16)||(_text.trim())==''){
-	      		$.alert("内容长度不符合要求!");
-	      	}
-	      	else{
-	      		curr_id = parseInt(_this.attr('id'));
-	      		_this.removeClass('jian-add-skill');
-	      		if(curr_id<=6){
-	      			$('#'+(curr_id+1)).addClass('jian-add-skill').addClass('jian-form-edit').html(_this.html());
-	      		}
-	      		_this.html(_text);
-	      		// skills[curr_id] = _this.parent().html();
-	      		// skills[curr_id+1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
-	      		if(_this.html().trim()==''){
-	      			alert($(event.target));
-	      		}
-	      		_this.after('<img src="http://res.jian-hu.cn/static/img/close@2x.png" class="jian-skill-clear">');
-	      	}
-	    }, function() {
-	      //取消操作
-	    });
+		myPrompt(_this);
     }
 });
+
+
+function myPrompt(_this){
+	$.prompt("技能要求不能超过16个字符或不为空", "输入技能要求", function(_text) {
+      	if(!isLimit(_text, 16)||(_text.trim())==''){
+      		// $.alert("内容长度不符合要求!");
+      		myPrompt(_this);
+      		$('.weui-prompt-text').css('color','red');
+      	}
+      	else{
+	  		curr_id = parseInt(_this.attr('id'));
+	  		_this.removeClass('jian-add-skill');
+	  		if(curr_id<=6){
+	  			$('#'+(curr_id+1)).addClass('jian-add-skill').addClass('jian-form-edit').html(_this.html());
+	  		}
+	  		_this.html(_text);
+	  		// skills[curr_id] = _this.parent().html();
+	  		// skills[curr_id+1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
+	  		if(_this.html().trim()==''){
+	  			alert($(event.target));
+	  		}
+	  		_this.after('<img src="http://res.jian-hu.cn/static/img/close@2x.png" class="jian-skill-clear">');
+      	}
+    }, function() {
+      //取消操作
+    });
+}
 
 $(".jian-fabu-btn").on('click','', function(event) {
 	$.confirm("确认后不可撤回哦！", "确认发送?", function() {
@@ -149,6 +153,20 @@ $("#city-picker").cityPicker({
 
 });
 
+
+function formatUpload(){
+	var width = $('.imgdiv').width();
+	$('.imgdiv').height(width);
+
+	$('.weui_uploader_input_wrp').height(width-2);//去除两个border的宽度2px
+	$('.weui_uploader_input_wrp').width(width-2);
+
+	$('.imgdiv').each(function(index, el) {
+		setImgAutoSize($(this).find('img'));
+	});
+}
+formatUpload();
+
 function isLimit(val, max) {  
     var returnValue = '';  
     var byteValLen = 0;  
@@ -164,3 +182,19 @@ function isLimit(val, max) {
      return true;  
     }  
 }  
+
+//传入的img自动等比例缩放
+function setImgAutoSize(img){
+	$("<img/>").attr("src", img.attr("src")).load(function() {
+		var realWidth = this.width;
+		var realHeight = this.height;
+		if (realHeight>realWidth) {
+			img.css('width', '100%');
+			console.log("高度大");
+		}else{
+			img.css('height', '100%');
+			img.css('width', 'auto');
+			console.log("宽度大");
+		}
+	});
+}
