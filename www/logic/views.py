@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, RequestContext
 # Create your views here.
 from common import convert
 from django.http import HttpResponse
 from models import Job, VipJobList
-
+import json
 import logging
 from common.string import gen_uuid
 
+from wx_base.backends.dj import Helper, sns_userinfo
+from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
+
 from user.views import fetch_user_info_callback
 from wx_base.backends.dj import sns_userinfo_callback
+
 sns_userinfo_with_userinfo = sns_userinfo_callback(fetch_user_info_callback)
+
 
 @sns_userinfo_with_userinfo
 def index(request):
@@ -36,13 +41,16 @@ def index(request):
 
 	return render_to_response('index.html')
 
+
 @sns_userinfo_with_userinfo
 def msg(request):
 	return render_to_response('chat/mesg.html')
 
+
 @sns_userinfo_with_userinfo
 def home(request):
 	return HttpResponse("请渲染Home页")
+
 
 @sns_userinfo_with_userinfo
 def get_job(request):
@@ -59,7 +67,8 @@ def get_job(request):
 
 	return render_to_response('job/job_detail.html')
 
-@sns_userinfo_with_userinfo
+
+# @sns_userinfo_with_userinfo
 def post_job(request):
 	company_name = request.POST.get('company_name')
 	job_title = request.POST.get('job_title')
@@ -67,8 +76,11 @@ def post_job(request):
 	salary = request.POST.get('salary')
 	education = request.POST.get('education')
 	city = request.POST.get('city')
-	skill = request.POST.get('skill')
-	piclist = request.POST.get('piclist')
+	skill = request.POST.get('skill1') + "," + request.POST.get('skill2') + "," + request.POST.get(
+		'skill3') + "," + request.POST.get('skill4') + "," + request.POST.get('skill5') + "," + request.POST.get(
+		'skill6')
+	# piclist = request.POST.get('piclist')
+	piclist = "hh.jpg"
 
 	user_id = 1  # get userid from session
 
@@ -81,20 +93,26 @@ def post_job(request):
 	if is_vip:
 		vip_job = VipJobList(job_id=job.id)
 		vip_job.save()
+	return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
 
-	return render_to_response('job/job_fabu.html')
 
 @sns_userinfo_with_userinfo
 def post_job_success(request):
 	return render_to_response('job/job_success.html')
 
-@sns_userinfo_with_userinfo
+
+# @sns_userinfo_with_userinfo
 def fabu_job(request):
-	return render_to_response('job/job_fabu.html')
+	url = "http://" + request.get_host() + request.path
+	sign = Helper.jsapi_sign(url)
+	sign["appId"] = WxPayConf_pub.APPID
+	return render_to_response('job/job_fabu.html', {"jsapi": json.dumps(sign)})
+
 
 @sns_userinfo_with_userinfo
 def recommand_job(request):
 	return render_to_response('job/job_recommand.html')
+
 
 @sns_userinfo_with_userinfo
 def chat(request):

@@ -12,211 +12,251 @@
 <body>
 <div class="weui_tab">
     <div class="weui_navbar jian-title">
-        <a href="javascript:history.back(-1);"><img src="http://res.jian-hu.cn/static/img/back@2x.png" class="jian-title-back"></a>
+        <a href="javascript:history.back(-1);"><img src="http://res.jian-hu.cn/static/img/back@2x.png"
+                                                    class="jian-title-back"></a>
         <img src="http://res.jian-hu.cn/static/img/jianhu@2x.png" height="30px" width="52px" style="margin: 7px auto">
-        
+
     </div>
     <div class="weui_tab_bd" style="margin-top: -42px;padding-top: 87px">
         <div class="jian-item-space"></div>
 
         <!-- form start -->
-        <div class="weui_cells weui_cells_form jian-form">
-            <div class="weui_cell jian-form-cell">
-                <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">公司名称</label></div>
-                <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                  <input class="weui_input" type="text" placeholder="请输入公司名称">
-                </div>
-            </div>
-            <div class="weui_cell jian-form-cell">
-                <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">职位名称</label></div>
-                <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                  <input class="weui_input" type="text" placeholder="请输入职位名称">
-                </div>
-            </div>
-            
-            <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
-                <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">工作经验</label></div>
-                <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                    <select class="weui_select" name="select1" style="padding-left: 0;color: #8e8e8e;">
-                        <option selected="true" value="1">不限</option>
-                        <option value="2">1-3 年</option>
-                        <option value="3">3-5 年</option>
-                        <option value="3">5-10 年</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
-                <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">薪资范围</label></div>
-                <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                    <select class="weui_select" name="select1" style="padding-left: 0;color: #8e8e8e;">
-                        <option selected="true" value="1">3k-5k</option>
-                        <option value="2">5k-10k</option>
-                        <option value="3">10k-15k</option>
-                        <option value="4">15k-25k</option>
-                        <option value="5">25k以上</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
-                <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">学历</label></div>
-                <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                    <select class="weui_select" name="select1" style="padding-left: 0;color: #8e8e8e;">
-                        <option selected="true" value="1">不限</option>
-                        <option value="2">专科</option>
-                        <option value="3">本科</option>
-                        <option value="4">硕士</option>
-                        <option value="5">博士</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="weui_cell weui_cell_select jian-form-cell" style="padding: 15px;10px;">
-                <div class="weui_cell_hd" style="width: 145px;">
-                <label class="weui_label">工作城市</label></div>
-                <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                    <input class="weui_input" type="text" id='city-picker' value="北京 北京市" />
-                </div>
-            </div>
-
-            <div class="jian-item-space"></div>
-
-            <div class="" style="padding:15px;">
-                <div class="weui-row" style="margin-bottom: 12px;">
-                    <div class="weui-col-50 jian-form-skill" style="">
-                        <font>技能要求</font>
+        <form action="/job/post_job" method="post" class="myform" >
+            {% csrf_token %}
+            <div class="weui_cells weui_cells_form jian-form">
+                <div class="weui_cell jian-form-cell">
+                    <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">公司名称</label></div>
+                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                        <input class="weui_input" type="text" name="company_name" placeholder="请输入公司名称">
                     </div>
-
-                    <div class="weui-col-50">
-                        <a href="#">
-                        <div class="jian-form-edit-btn">
-                            编辑
-                        </div>
-                        </a>
-
-                        <a href="#">
-                        <div class="jian-form-cancel-btn" style="display: none">
-                            取消
-                        </div>
-                        </a>
+                </div>
+                <div class="weui_cell jian-form-cell">
+                    <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">职位名称</label></div>
+                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                        <input class="weui_input" type="text" name="job_title" placeholder="请输入职位名称">
                     </div>
                 </div>
 
-                <div class="weui-row weui-no-gutter" style="margin-right: -8px; ">
-                    <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
-                        <div class="jian-form-edit jian-add-skill" id="1">
-                            <img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">
+                <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
+                    <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">工作经验</label></div>
+                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                        <select class="weui_select" name="work_experience" style="padding-left: 0;color: #8e8e8e;">
+                            <option selected="true" value="1">不限</option>
+                            <option value="2">1-3 年</option>
+                            <option value="3">3-5 年</option>
+                            <option value="4">5-10 年</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
+                    <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">薪资范围</label></div>
+                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                        <select class="weui_select" name="salary" style="padding-left: 0;color: #8e8e8e;">
+                            <option selected="true" value="1">3k-5k</option>
+                            <option value="2">5k-10k</option>
+                            <option value="3">10k-15k</option>
+                            <option value="4">15k-25k</option>
+                            <option value="5">25k以上</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui_cell weui_cell_select jian-form-cell" style="padding-left: 15px;">
+                    <div class="weui_cell_hd" style="width: 145px;"><label class="weui_label">学历</label></div>
+                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                        <select class="weui_select" name="education" style="padding-left: 0;color: #8e8e8e;">
+                            <option selected="true" value="1">不限</option>
+                            <option value="2">专科</option>
+                            <option value="3">本科</option>
+                            <option value="4">硕士</option>
+                            <option value="5">博士</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui_cell weui_cell_select jian-form-cell" style="padding: 15px;10px;">
+                    <div class="weui_cell_hd" style="width: 145px;">
+                        <label class="weui_label">工作城市</label></div>
+                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                        <input class="weui_input" name="city" type="text" id='city-picker' value="北京 北京市"/>
+                    </div>
+                </div>
+
+                <div class="jian-item-space"></div>
+
+                <div class="" style="padding:15px;">
+                    <div class="weui-row" style="margin-bottom: 12px;">
+                        <div class="weui-col-50 jian-form-skill" style="">
+                            技能要求
+                        </div>
+
+                        <div class="weui-col-50">
+                            <a href="#">
+                                <div class="jian-form-edit-btn">
+                                    编辑
+                                </div>
+                            </a>
+
+                            <a href="#">
+                                <div class="jian-form-cancel-btn" style="display: none">
+                                    取消
+                                </div>
+                            </a>
                         </div>
                     </div>
 
-                    <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
-                        <div id="2">
+                    <div class="weui-row weui-no-gutter" style="margin-right: -8px; ">
+                        <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
+                            <div class="jian-form-edit jian-add-skill" id="1">
+                                <img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">
+                            </div>
                         </div>
+
+                        <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
+                            <div id="2">
+                            </div>
+                        </div>
+
+                        <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
+                            <div id="3">
+                            </div>
+                        </div>
+
+
                     </div>
 
-                    <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
-                        <div id="3">
+                    <div class="weui-row weui-no-gutter" style="margin: 10px -8px 0 0; ">
+                        <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
+                            <div id="4">
+                            </div>
                         </div>
+
+                        <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
+                            <div id="5">
+                            </div>
+
+                        </div>
+
+                        <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
+                            <div id="6">
+                            </div>
+                        </div>
+
+
                     </div>
 
-                    
                 </div>
+                <input type="hidden" class="skill1" name="skill1">
+                <input type="hidden" class="skill2" name="skill2">
+                <input type="hidden" class="skill3" name="skill3">
+                <input type="hidden" class="skill4" name="skill4">
+                <input type="hidden" class="skill5" name="skill5">
+                <input type="hidden" class="skill6" name="skill6">
 
-                <div class="weui-row weui-no-gutter" style="margin: 10px -8px 0 0; ">
-                    <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
-                        <div id="4">
+                <div class="jian-item-space"></div>
+                <!-- upload-img start 2016-7-21 22:27:34 in Pearl`s Hill of Singapore -->
+
+                <div class="weui_cell_bd" style="padding:15px;">
+                    <div class="weui_uploader_hd weui_cell">
+                        <div class="weui_cell_bd" style="font-size: 16px;line-height: 28px;margin-bottom: 10px;">图片上传
+                        </div>
+                    </div>
+                    <div class="weui-row" style="overflow: hidden;">
+                        <div class="weui-col-33 imgdiv">
+                            <img src="http://res.jian-hu.cn/static/img/tencent2.jpg">
+                        </div>
+                        <div class="weui-col-33 imgdiv">
+                            <img src="http://res.jian-hu.cn/static/img/tencent5.jpg">
+                        </div>
+                        <div class="weui-col-33 imgdiv">
+                            <img src="http://res.jian-hu.cn/static/img/tencent4.jpg">
                         </div>
                     </div>
 
-                    <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
-                        <div id="5">
+                    <div class="weui-row" style="overflow: hidden;margin-top: 10px;">
+                        <div class="weui-col-33 imgdiv">
+                            <img src="http://res.jian-hu.cn/static/img/tencent3.jpg">
                         </div>
-                        
-                    </div>
-
-                    <div class="weui-col-33" style="padding: 8px 10px 0 0;position: relative;">
-                        <div id="6">
+                        <div class="weui-col-33 imgdiv">
+                            <img src="http://res.jian-hu.cn/static/img/tencent1.jpg">
                         </div>
-                    </div>
-
-                    
-                </div>
-
-            </div>
-
-            <div class="jian-item-space"></div>
-            <!-- upload-img start 2016-7-21 22:27:34 in Pearl`s Hill of Singapore -->
-            
-            <div class="weui_cell_bd" style="padding:15px;">
-                <div class="weui_uploader_hd weui_cell">
-                    <div class="weui_cell_bd" style="font-size: 16px;line-height: 28px;margin-bottom: 10px;">图片上传</div>
-                </div>
-                    <!-- <ul class="weui_uploader_files">
-                    <li class="weui_uploader_file jian-upload-img"></li>
-                    <li class="weui_uploader_file jian-upload-img"></li>
-                    <li class="weui_uploader_file jian-upload-img"></li>
-                    <li class="weui_uploader_file jian-upload-img"></li>
-                    <li class="weui_uploader_file weui_uploader_status jian-upload-img">
-                        <div class="weui_uploader_status_content">50%</div>
-                    </li>
-                    </ul> -->
-                <div class="weui-row" style="overflow: hidden;">
-                    <div class="weui-col-33 imgdiv">
-                        <img src="http://res.jian-hu.cn/static/img/tencent2.jpg" >
-                    </div>
-                    <div class="weui-col-33 imgdiv">
-                        <img src="http://res.jian-hu.cn/static/img/tencent5.jpg" >
-                    </div>
-                    <div class="weui-col-33 imgdiv">
-                        <img src="http://res.jian-hu.cn/static/img/tencent4.jpg" >
-                    </div>
-                </div>
-
-                <div class="weui-row" style="overflow: hidden;margin-top: 10px;">
-                    <div class="weui-col-33 imgdiv">
-                        <img src="http://res.jian-hu.cn/static/img/tencent3.jpg" >
-                    </div>
-                    <div class="weui-col-33 imgdiv">
-                        <img src="http://res.jian-hu.cn/static/img/tencent1.jpg" >
-                    </div>
-                    <div class="weui-col-33 imgdiv">
-                        <div class="weui_uploader_input_wrp" style="margin:0">
-                        <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+                        <div class="weui-col-33 imgdiv">
+                            <div class="weui_uploader_input_wrp" style="margin:0">
+                                <input class="weui_uploader_input" type="file"
+                                       accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+                            </div>
                         </div>
                     </div>
-                </div>
                     <!-- <div class="weui_uploader_input_wrp">
                     <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
                     </div> -->
+                </div>
+
+                <!-- upload-img end 2016-7-21 22:27:34 in Pearl`s Hill of Singapore -->
+
             </div>
-           
-        <!-- upload-img end 2016-7-21 22:27:34 in Pearl`s Hill of Singapore -->
-
-        </div>
-
+        </form>
 
         <!-- form end -->
 
-        
 
-        
-    
     </div>
     <div class="weui_tabbar">
-        
+
         <a href="#" class="jian-fabu-btn weui_tabbar_item" style="padding-top: 0;">
             <div class="jian-tabbar-fabu">
                 <span style="margin-top: 14px;">确认发布</span>
-            </div>            
+            </div>
         </a>
-        
+
     </div>
 </div>
+
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/js/jquery-weui.js"></script>
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/js/city-picker.min.js"></script>
 
 <script src="http://res.jian-hu.cn/static/dist/js/app-fabu.js"></script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript">
+{#    var jsapi = {{ jsapi|safe }};#}
+    {#    console.log(jsapi);#}
+{#    wx.config({#}
+{#        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。#}
+{#        appId: jsapi.appId, // 必填，公众号的唯一标识#}
+{#        timestamp: jsapi.timestamp, // 必填，生成签名的时间戳#}
+{#        nonceStr: jsapi.nonceStr, // 必填，生成签名的随机串#}
+{#        signature: jsapi.signature,// 必填，签名，见附录1#}
+{#        jsApiList: [#}
+{#            'chooseImage',#}
+{#            'previewImage',#}
+{#            'uploadImage'#}
+{#        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2#}
+{#    });#}
+{#    wx.ready(function () {#}
+        {#        alert("success");#}
+{#        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。#}
+{#    });#}
+{##}
+{#    wx.error(function (res) {#}
+{##}
+{#        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。#}
+{##}
+{#    });#}
+    {#    $(".imgdiv").on('click', 'img', function (event) {#}
+    {#        wx.chooseImage({#}
+    {#            count: 1, // 默认9#}
+    {#            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有#}
+    {#            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有#}
+    {#            success: function (res) {#}
+    {#                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片#}
+    {#                this.src = localIds;#}
+    {#            }#}
+    {#        });#}
+    {#    });#}
+</script>
 </body>
 </html>
