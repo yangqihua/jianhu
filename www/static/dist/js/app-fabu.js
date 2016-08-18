@@ -24,23 +24,11 @@ Query.find(expr),跟jQuery.filter(expr)完全不一样。jQuery.filter()是从�
 比如$("p"),find("span"),是从元素开始找,等同于$("p span")
 */
 
-
-
-
-// $('body').on('click',function(event){
-// 	$('.jian-skill-clear').css('display','none');
-// });
-
-// var skills = [];
-// skills[1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
 //编辑技能
 $(".weui-row").on('click','.jian-form-edit-btn', function(event) {
 
 	var _this = $(event.target);
 	if (_this.html() == '确定') {
-		// for(var i = 1;i<=6;i++){
-		// 	skills[i] = $('#'+i).parent().html();
-		// }
 
 		$('.jian-skill-clear').css('display','none');
 		_this.html('编辑');
@@ -48,7 +36,6 @@ $(".weui-row").on('click','.jian-form-edit-btn', function(event) {
 	}else{
 		$('.jian-skill-clear').css('display','block');
 		_this.html('确定');
-		// $('.jian-form-cancel-btn').css('display','block');
 	};
 });
 
@@ -59,10 +46,6 @@ $('.jian-form-cancel-btn').on('click', function(event) {
 	$('.jian-skill-clear').css('display','none');
 	var edit = _this.parent().prev().children('.jian-form-edit-btn');
 	edit.html('编辑');
-
-	// for(var i = 1;i<=6;i++){
-	// 	$('#'+i).html(skills[i]);
-	// }
 
 });
 
@@ -114,7 +97,6 @@ $(".weui-row").on('click','.jian-add-skill', function(event) {
 function myPrompt(_this){
 	$.prompt("技能要求不能超过16个字符或不为空", "输入技能要求", function(_text) {
       	if(!isLimit(_text, 16)||(_text.trim())==''){
-      		// $.alert("内容长度不符合要求!");
       		myPrompt(_this);
       		$('.weui-prompt-text').css('color','red');
       	}
@@ -125,12 +107,11 @@ function myPrompt(_this){
 	  			$('#'+(curr_id+1)).addClass('jian-add-skill').addClass('jian-form-edit').html(_this.html());
 	  		}
 	  		_this.html(_text);
-	  		// skills[curr_id] = _this.parent().html();
-	  		// skills[curr_id+1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
 	  		if(_this.html().trim()==''){
 	  			alert($(event.target));
 	  		}
 	  		_this.after('<img src="http://res.jian-hu.cn/static/img/close@2x.png" class="jian-skill-clear">');
+            $('.skill'+curr_id).attr('value',_text);//给隐藏的input赋值
       	}
     }, function() {
       //取消操作
@@ -139,13 +120,12 @@ function myPrompt(_this){
 
 $(".jian-fabu-btn").on('click','', function(event) {
 	$.confirm("确认后不可撤回哦！", "确认发送?", function() {
-      	location.href = "/job/post_job_success";
+        $('.myform').submit();
+      	//location.href = "/job/post_job_success";
     }, function() {
       //取消操作
     });
 });
-
-
 
 
 $("#city-picker").cityPicker({
@@ -166,8 +146,7 @@ function formatUpload(){
 	});
 }
 formatUpload();
-
-function isLimit(val, max) {  
+function isLimit(val, max) {
     var returnValue = '';  
     var byteValLen = 0;  
     for (var i = 0; i < val.length; i++) {  
@@ -190,11 +169,9 @@ function setImgAutoSize(img){
 		var realHeight = this.height;
 		if (realHeight>realWidth) {
 			img.css('width', '100%');
-			console.log("高度大");
 		}else{
 			img.css('height', '100%');
 			img.css('width', 'auto');
-			console.log("宽度大");
 		}
 	});
 }
