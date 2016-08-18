@@ -68,7 +68,7 @@ def get_job(request):
 	return render_to_response('job/job_detail.html')
 
 from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt 
+@csrf_exempt
 @sns_userinfo_with_userinfo
 def post_job(request):
 	company_name = request.POST.get('company_name')
@@ -77,11 +77,9 @@ def post_job(request):
 	salary = request.POST.get('salary')
 	education = request.POST.get('education')
 	city = request.POST.get('city')
-	skill = request.POST.get('skill1') + "," + request.POST.get('skill2') + "," + request.POST.get(
-		'skill3') + "," + request.POST.get('skill4') + "," + request.POST.get('skill5') + "," + request.POST.get(
-		'skill6')
-	# piclist = request.POST.get('piclist')
-	piclist = "hh.jpg"
+	skill = request.POST.get('skill1') + "," + request.POST.get('skill2') + "," + request.POST.get( 'skill3') + "," + request.POST.get('skill4') + "," + request.POST.get('skill5') + "," + request.POST.get( 'skill6')
+	piclist = request.POST.get('img_url1')+","+request.POST.get('img_url2')+","+request.POST.get('img_url3')+","+ request.POST.get('img_url4')+","+request.POST.get('img_url5')+","+request.POST.get('img_url6')
+	# piclist = "hh.jpg"
 
 	user_id = 1  # get userid from session
 
@@ -89,12 +87,13 @@ def post_job(request):
 		work_experience=work_experience, salary=salary, education=education, city=city, skill=skill, piclist=piclist)
 	job.save()
 
-	is_vip = True
+	# is_vip = True
 
-	if is_vip:
-		vip_job = VipJobList(job_id=job.id)
-		vip_job.save()
-	return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
+	# if is_vip:
+	# 	vip_job = VipJobList(job_id=job.id, user_id=user_id)
+	# 	vip_job.save()
+	# return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
+	return render(request, 'job/job_success.html', {'job':job})
 
 
 @sns_userinfo_with_userinfo
@@ -102,7 +101,7 @@ def post_job_success(request):
 	return render_to_response('job/job_success.html')
 
 
-# @sns_userinfo_with_userinfo
+@sns_userinfo_with_userinfo
 def fabu_job(request):
 	url = "http://" + request.get_host() + request.path
 	sign = Helper.jsapi_sign(url)
