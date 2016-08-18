@@ -67,8 +67,11 @@ def get_job(request):
 
 	return render_to_response('job/job_detail.html')
 
+
 from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt 
+
+
+@csrf_exempt
 @sns_userinfo_with_userinfo
 def post_job(request):
 	company_name = request.POST.get('company_name')
@@ -92,7 +95,7 @@ def post_job(request):
 	is_vip = True
 
 	if is_vip:
-		vip_job = VipJobList(job_id=job.id)
+		vip_job = VipJobList(job_id=job.id, user_id=user_id)
 		vip_job.save()
 	# return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
 	return render(request, 'job/job_success.html', {'job': job})
@@ -103,7 +106,7 @@ def post_job_success(request):
 	return render_to_response('job/job_success.html')
 
 
-# @sns_userinfo_with_userinfo
+@sns_userinfo_with_userinfo
 def fabu_job(request):
 	url = "http://" + request.get_host() + request.path
 	sign = Helper.jsapi_sign(url)
