@@ -67,8 +67,9 @@ def get_job(request):
 
 	return render_to_response('job/job_detail.html')
 
-
-# @sns_userinfo_with_userinfo
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt 
+@sns_userinfo_with_userinfo
 def post_job(request):
 	company_name = request.POST.get('company_name')
 	job_title = request.POST.get('job_title')
