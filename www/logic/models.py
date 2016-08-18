@@ -29,6 +29,7 @@ class Job(models.Model):
 
 
 class VipJobList(models.Model):
+
 	job_id = models.IntegerField(db_index=True)
 	user_id = models.IntegerField(primary_key=True)  # 一个用户在该表中只能存一条
 	pub_time = models.DateTimeField(db_index=True, auto_now_add=True)

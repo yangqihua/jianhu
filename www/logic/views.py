@@ -1,21 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import render_to_response, RequestContext
-# Create your views here.
 from common import convert
 from django.http import HttpResponse
 from models import Job, VipJobList
 import json
 import logging
 from common.string import gen_uuid
-
 from wx_base.backends.dj import Helper, sns_userinfo
 from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
-
-from user.views import fetch_user_info_callback
-from wx_base.backends.dj import sns_userinfo_callback
-
-sns_userinfo_with_userinfo = sns_userinfo_callback(fetch_user_info_callback)
+from user.user_tools import sns_userinfo_with_userinfo, get_userid_by_openid
 
 
 @sns_userinfo_with_userinfo
@@ -70,7 +64,6 @@ def get_job(request):
 
 from django.views.decorators.csrf import csrf_exempt
 
-
 @csrf_exempt
 @sns_userinfo_with_userinfo
 def post_job(request):
@@ -80,19 +73,22 @@ def post_job(request):
 	salary = request.POST.get('salary')
 	education = request.POST.get('education')
 	city = request.POST.get('city')
-	skill = request.POST.get('skill1') + "," + request.POST.get('skill2') + "," + request.POST.get(
-		'skill3') + "," + request.POST.get('skill4') + "," + request.POST.get('skill5') + "," + request.POST.get(
-		'skill6')
-	# piclist = request.POST.get('piclist')
-	piclist = "hh.jpg"
+	
+	skill = request.POST.get('skill1') + "," + request.POST.get('skill2') + "," + request.POST.get( 'skill3') + "," + request.POST.get('skill4') + "," + request.POST.get('skill5') + "," + request.POST.get( 'skill6')
+	
+	piclist = request.POST.get('img_url1')+","+request.POST.get('img_url2')+","+request.POST.get('img_url3')+","+ request.POST.get('img_url4')+","+request.POST.get('img_url5')+","+request.POST.get('img_url6')
 
-	user_id = 1  # get userid from session
+	user_id = get_userid_by_openid(request.openid)
+	if not user_id:
+		logging.error('Cant find user_id by openid: %s when post_job' % request.openid)
+		return "异常页面"
 
 	job = Job(uuid=gen_uuid(), user_id=user_id, company_name=company_name, job_title=job_title,
 		work_experience=work_experience, salary=salary, education=education, city=city, skill=skill, piclist=piclist)
 	job.save()
 
-	is_vip = True
+	# is_vip = True
+
 
 	if is_vip:
 		vip_job = VipJobList(job_id=job.id, user_id=user_id)

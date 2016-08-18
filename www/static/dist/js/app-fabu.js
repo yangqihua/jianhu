@@ -162,27 +162,26 @@ $(".weui-row").on('click', '.jian-img-clear', function (event) {
         imgdiv7 = '<div class="weui_uploader_input_wrp" style="margin:0"><div class="weui_uploader_input"></div></div>';
     }
 
-    for (var i = parseInt(curr_id); i <= 6; i++) {
-        if (i == 6) {
-            $('#imgdiv' + i).html(imgdiv7);
-            formatUpload("imgdiv6");
+    for(var i = parseInt(curr_id); i<=6;i++){
+        if (i==6) {
+            $('#imgdiv'+i).html(imgdiv7);
         }
-        else {
-            $('#imgdiv' + i).html($('#imgdiv' + (i + 1)).html());
+        else{
+            $('#imgdiv'+i).html($('#imgdiv'+(i+1)).html());
+        }
+    }
+    for(var i = 1; i<=6;i++){
+        if($('#imgdiv'+i).children().length==0){
+            console.log(i);
+            $('#imgdiv'+i).css('height','0');
+        }else{
+            formatUpload("imgdiv6");
         }
     }
 });
 
 
 //添加图片
-$(".weui-row").on('click', '.weui_uploader_input', function (event) {
-    var _this = $(event.target);
-    if ($('.jian-upload-label .jian-form-edit-btn').text() == '确定') {
-        $.toptip('请先确定', 'warning');
-    } else {
-        addImg(_this, 'http://res.jian-hu.cn/static/img/tencent2.jpg');
-    }
-});
 
 function addImg(_this, img_src) {
     var imgdiv = _this.parent().parent();
