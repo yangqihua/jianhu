@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import logging
 from common.string import gen_uuid
 from user.models import Bind, Profile, ProfileExt
 
@@ -47,9 +48,9 @@ sns_userinfo_with_userinfo = sns_userinfo_callback(fetch_user_info_callback)
 
 def get_userid_by_openid(openid):
     if openid:
-        bind = Bind.objects.filter(wx_openid=openid).only('user_id')[:1]
+        bind = Bind.objects.filter(wx_openid=openid).only('user_id')[0]
         if bind:
-            return bind['user_id']
+            return bind.user_id
     
     return None
 
