@@ -93,7 +93,8 @@ def post_job(request):
 	if is_vip:
 		vip_job = VipJobList(job_id=job.id)
 		vip_job.save()
-	return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
+	# return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
+	return render(request, 'job/job_success.html', {'job': job})
 
 
 @sns_userinfo_with_userinfo
