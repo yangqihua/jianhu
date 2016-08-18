@@ -1,10 +1,4 @@
 # coding:utf-8
-'''
-Created on 2014-5-13
-
-@author: skycrab
-'''
-
 
 class WxPayConf_pub(object):
 	"""配置账号信息"""

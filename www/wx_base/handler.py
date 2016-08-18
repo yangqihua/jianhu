@@ -1,9 +1,5 @@
 #coding=utf8
-'''
-Created on 2014-5-13
 
-@author: skycrab
-'''
 import time
 from collections import defaultdict
 from .lib import WeixinHelper, ObjectDict
