@@ -63,7 +63,6 @@ def get_job(request):
 
 
 from django.views.decorators.csrf import csrf_exempt
-
 @csrf_exempt
 @sns_userinfo_with_userinfo
 def post_job(request):
@@ -89,12 +88,11 @@ def post_job(request):
 
 	# is_vip = True
 
-
-	if is_vip:
-		vip_job = VipJobList(job_id=job.id, user_id=user_id)
-		vip_job.save()
+	# if is_vip:
+	# 	vip_job = VipJobList(job_id=job.id, user_id=user_id)
+	# 	vip_job.save()
 	# return render_to_response('job/job_success.html', {}, context_instance=RequestContext(request))
-	return render(request, 'job/job_success.html', {'job': job})
+	return render(request, 'job/job_success.html', {'job':job})
 
 
 @sns_userinfo_with_userinfo

@@ -183,6 +183,7 @@ $(".weui-row").on('click', '.jian-img-clear', function (event) {
 
 //添加图片
 
+
 function addImg(_this, img_src) {
     var imgdiv = _this.parent().parent();
     var dom = '<img src="' + img_src + '" class="mimg" ><img src="http://res.jian-hu.cn/static/img/close@2x.png" class="jian-img-clear">'
