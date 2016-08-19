@@ -59,7 +59,11 @@ def get_job(request):
 		logging.error("uid(%s) try to get not exsit job(%s), maybe attack" % (uid, job_uuid))
 	# 返回错误
 
-	return render_to_response('job/job_detail.html')
+	url = "http://" + request.get_host() + request.path
+	sign = Helper.jsapi_sign(url)
+	sign["appId"] = WxPayConf_pub.APPID
+
+	return render_to_response('job/job_detail.html', {"jsapi": json.dumps(sign)})
 
 
 from django.views.decorators.csrf import csrf_exempt
