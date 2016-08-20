@@ -55,7 +55,6 @@ def sns_userinfo_callback(callback=None):
 					current = "http://" + request.get_host() + request.get_full_path()
 					return redirect(WeixinHelper.oauth2(current))
 				else:
-					# 这里未考虑网络异常情况
 					data = json.loads(WeixinHelper.getAccessTokenByCode(code))
 					access_token, openid, refresh_token = data["access_token"], data["openid"], data["refresh_token"]
 					# WeixinHelper.refreshAccessToken(refresh_token)

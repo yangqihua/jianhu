@@ -169,8 +169,8 @@
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/js/jquery-weui.js"></script>
 <script src="http://res.jian-hu.cn/static/dist/js/app-me.js"></script>
 <script type="text/javascript">
-    var user = {{ user | safe }}
-            $('#user_name').text(user.nick);
+    var user = {{ user | safe }};
+    $('#user_name').text(user.nick);
     $('#user_company').text(user.company);
     $('#user_addr').text(user.city);
     $('#user_portrait').attr('src', user.portrait);

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from common.string import gen_uuid
+from common.str_tools import gen_uuid
 from user.models import Bind, Profile, ProfileExt
 import datetime
 
@@ -54,4 +54,11 @@ def get_userid_by_openid(openid):
             return bind.user_id
     
     return None
+
+def is_vip(user_id):
+    profile = Profile.objects.filter(id=user_id)[0]
+    if profile and profile.vip:
+        return True
+
+    return False
 

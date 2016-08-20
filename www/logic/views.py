@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import render_to_response, RequestContext
-from common import convert
-from django.http import HttpResponse, HttpResponseRedirect
+from common import convert, str_tools
+from django.http import HttpResponse,HttpResponseRedirect
 from models import Job, VipJobList
 import json
+import oss2
 import logging
-from common.string import gen_uuid
+import requests
+import datetime
+from wx_base.backends.common import CommonHelper
+from settings import ALI_ACCESS_KEY, ALI_ACCESS_SECRET
 from wx_base.backends.dj import Helper, sns_userinfo
 from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch
-from user.user_tools import sns_userinfo_with_userinfo, get_userid_by_openid
+from user.user_tools import sns_userinfo_with_userinfo, get_userid_by_openid, is_vip
 
 
 @sns_userinfo_with_userinfo
@@ -57,15 +61,16 @@ def get_job(request):
 		pass
 	else:
 		logging.error("uid(%s) try to get not exsit job(%s), maybe attack" % (uid, job_uuid))
+	
 	# 返回错误
 
 	url = "http://" + request.get_host() + request.path
 	sign = Helper.jsapi_sign(url)
 	sign["appId"] = WxPayConf_pub.APPID
-
 	return render_to_response('job/job_detail.html', {"jsapi": json.dumps(sign)})
 
 
+#暂时规避跨站攻击保护
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -83,30 +88,55 @@ def post_job(request):
 		'skill3') + "," + request.POST.get('skill4') + "," + request.POST.get('skill5') + "," + request.POST.get(
 		'skill6')
 
-	piclist = request.POST.get('img_url1') + "," + request.POST.get('img_url2') + "," + request.POST.get(
-		'img_url3') + "," + request.POST.get('img_url4') + "," + request.POST.get('img_url5') + "," + request.POST.get(
-		'img_url6')
+# <<<<<<< HEAD
+# 	piclist = request.POST.get('img_url1') + "," + request.POST.get('img_url2') + "," + request.POST.get(
+# 		'img_url3') + "," + request.POST.get('img_url4') + "," + request.POST.get('img_url5') + "," + request.POST.get(
+# 		'img_url6')
+# =======
+	piclist = ''
+
+	auth = oss2.Auth(ALI_ACCESS_KEY, ALI_ACCESS_SECRET)
+	bucket = oss2.Bucket(auth, 'http://oss-cn-shanghai.aliyuncs.com', 'ugcres')
+	access_token = CommonHelper.access_token()
+	for i in range(1, 7):
+		media_id = request.POST.get('img_url%s' % i)
+		if media_id:
+			url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=%s&media_id=%s" % (access_token, media_id)
+			picname = str_tools.gen_short_uuid()
+			bucket.put_object(picname, requests.get(url))
+			if piclist:
+				piclist = '%s,%s' % (piclist, picname)
+			else:
+				piclist = picname
+# >>>>>>> 9d62b13185fcd185bd9284c89437f58ac7e129bd
 
 	user_id = get_userid_by_openid(request.openid)
 	if not user_id:
 		logging.error('Cant find user_id by openid: %s when post_job' % request.openid)
-		return "异常页面"
+		return "异常页面, 需要界面"
 
-	job = Job(uuid=gen_uuid(), user_id=user_id, company_name=company_name, job_title=job_title,
+	job = Job(uuid=str_tools.gen_uuid(), user_id=user_id, company_name=company_name, job_title=job_title,
 		work_experience=work_experience, salary=salary, education=education, city=city, skill=skill, piclist=piclist)
 	job.save()
 
-	is_vip = True
-
-	if is_vip:
-		vip_job = VipJobList(job_id=job.id, user_id=user_id)
+# <<<<<<< HEAD
+# 	is_vip = True
+#
+# 	if is_vip:
+# 		vip_job = VipJobList(job_id=job.id, user_id=user_id)
+# 		vip_job.save()
+# 	# return render(request, 'job/job_success.html', {'job': job})
+# 	return HttpResponseRedirect('/job/post_job_success')
+#
+#
+# @sns_userinfo_with_userinfo
+# def post_job_success(request):
+# =======
+	if is_vip(user_id):
+		vip_job = VipJobList(job_id=job.id, user_id=user_id, pub_time=datetime.datetime.now())
 		vip_job.save()
-	# return render(request, 'job/job_success.html', {'job': job})
-	return HttpResponseRedirect('/job/post_job_success')
 
-
-@sns_userinfo_with_userinfo
-def post_job_success(request):
+# >>>>>>> 9d62b13185fcd185bd9284c89437f58ac7e129bd
 	url = "http://" + request.get_host() + request.path
 	sign = Helper.jsapi_sign(url)
 	sign["appId"] = WxPayConf_pub.APPID
@@ -115,6 +145,7 @@ def post_job_success(request):
 
 @sns_userinfo_with_userinfo
 def fabu_job(request):
+	# todo 从数据库中获取默认值
 	url = "http://" + request.get_host() + request.path
 	sign = Helper.jsapi_sign(url)
 	sign["appId"] = WxPayConf_pub.APPID
