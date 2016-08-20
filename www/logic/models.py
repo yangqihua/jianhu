@@ -16,7 +16,7 @@ class Job(models.Model):
     education = models.CharField(max_length=10)
     city = models.CharField(max_length=10)
     skill = models.CharField(max_length=120)
-    piclist = models.CharField(max_length=120)
+    piclist = models.CharField(max_length=256)
     is_valid = models.BooleanField(default=True)
     update_time = models.DateTimeField(auto_now=True)
     create_time = models.DateTimeField(auto_now_add=True)
