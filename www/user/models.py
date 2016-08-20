@@ -15,6 +15,7 @@ class Profile(models.Model):
     company_name = models.CharField(max_length=30)
     title = models.CharField(max_length=30)
     vip = models.BooleanField(default=False)
+    desc = models.CharField(max_length=150, default='')
     ################# 以上是概要信息部分 #####
     update_time = models.DateTimeField(auto_now=True)
     create_time = models.DateTimeField(auto_now_add=True)

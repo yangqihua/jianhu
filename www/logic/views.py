@@ -123,6 +123,7 @@ def post_job(request):
 
 @sns_userinfo_with_userinfo
 def fabu_job(request):
+	# todo 从数据库中获取默认值
 	url = "http://" + request.get_host() + request.path
 	sign = Helper.jsapi_sign(url)
 	sign["appId"] = WxPayConf_pub.APPID
