@@ -3,6 +3,7 @@
 import logging
 from common.string import gen_uuid
 from user.models import Bind, Profile, ProfileExt
+import datetime
 
 # 用户关注公众号
 def subscribe(openid, uninid):

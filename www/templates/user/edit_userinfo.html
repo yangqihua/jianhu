@@ -12,57 +12,60 @@
 <body>
 <div class="weui_tab">
     <div class="weui_navbar jian-title">
-        <a href="javascript:history.back(-1);"><img src="http://res.jian-hu.cn/static/img/back@2x.png" class="jian-title-back"></a>
-        <div class="jian-title-text">
-            完善资料
+        <a href="javascript:history.back(-1);"><img src="http://res.jian-hu.cn/static/img/back@2x.png"
+                                                    class="jian-title-back"></a>
+
+        <div class="jian-title-text" id="title">
+
         </div>
     </div>
     <!--以 weui_tab_bd 作为外部容器，下拉刷新、滚动加载控件必须在这个容器的之中-->
     <div class="weui_tab_bd" style="margin-top: 0;padding-top: 45px;background-color: #ebebeb;">
         <!--内容区-->
         <div id="content">
-            <div style="font-size: 17px;text-align: center;height: 80px;line-height: 80px;">
-                请先完善您的资料吧！
+            <div style="font-size: 17px;text-align: center;height: 80px;line-height: 80px;" id="tint">
+
             </div>
 
             <!-- form start -->
-            <div class="weui_cells weui_cells_form jian-form">
-                <div class="weui_cell jian-form-cell">
-                    <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">真实姓名</label></div>
-                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                      <input class="weui_input" type="text" placeholder="请输入真实姓名">
+            <form id="info_form" method="post" action="/user/post_userinfo">
+                <div class="weui_cells weui_cells_form jian-form">
+                    <div class="weui_cell jian-form-cell">
+                        <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">真实姓名</label></div>
+                        <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                            <input class="weui_input" name="real_name" id="real_name" type="text" placeholder="请输入真实姓名">
+                        </div>
+                    </div>
+                    <div class="weui_cell jian-form-cell">
+                        <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">所在公司</label></div>
+                        <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                            <input class="weui_input" name="company_name" id="company_name" type="text" placeholder="请输入所在公司">
+                        </div>
+                    </div>
+                    <div class="weui_cell jian-form-cell">
+                        <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">您的职位</label></div>
+                        <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                            <input class="weui_input" name="title" id="user_title" type="text" placeholder="请输入您的职位">
+                        </div>
+                    </div>
+
+                    <div class="weui_cell weui_cell_select jian-form-cell" style="padding: 15px;10px;">
+                        <div class="weui_cell_hd" style="width: 145px;">
+                            <label class="weui_label">所在城市</label></div>
+                        <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
+                            <input class="weui_input" name="city" type="text" id='city-picker' value="北京 北京市"/>
+                        </div>
                     </div>
                 </div>
-                <div class="weui_cell jian-form-cell">
-                    <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">所在公司</label></div>
-                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                      <input class="weui_input" type="text" placeholder="请输入所在公司">
-                    </div>
-                </div>
-                <div class="weui_cell jian-form-cell">
-                    <div class="weui_cell_hd jian-cell-hd"><label class="weui_label">您的职位</label></div>
-                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                      <input class="weui_input" type="text" placeholder="请输入您的职位">
-                    </div>
-                </div>
-                
-                <div class="weui_cell weui_cell_select jian-form-cell" style="padding: 15px;10px;">
-                    <div class="weui_cell_hd" style="width: 145px;">
-                    <label class="weui_label">所在城市</label></div>
-                    <div class="weui_cell_bd weui_cell_primary jian-form-cell-body">
-                        <input class="weui_input" type="text" id='city-picker' value="北京 北京市" />
-                    </div>
-                </div>
-            </div>
+            </form>
             <!-- form-end -->
 
             <div style="margin: 40px 15px">
-            <a href="/user/me">
-                <div style="text-align: center;font-size: 18px;color: #ffffff;background-color: #00a8ff;margin: 10px auto;padding: 8px;border-radius: 4px;">
+                <div id="info_submit"
+                     style="text-align: center;font-size: 18px;color: #ffffff;background-color: #00a8ff;margin: 10px auto;padding: 8px;border-radius: 4px;">
                     提交
                 </div>
-            </a>
-        </div>
+            </div>
         </div>
     </div>
 
@@ -72,5 +75,27 @@
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/js/city-picker.min.js"></script>
 
 <script src="http://res.jian-hu.cn/static/dist/js/app-fabu-list.js"></script>
+<script type="text/javascript">
+    var info = {{ info | safe }}
+            $('#title').text(info.title);
+    $('#tint').text(info.tint);
+
+    $('#info_submit').on('click', function (event) {
+        if($('#real_name').val()==''){
+            $.toast("请输入真实姓名","text");
+            return;
+        }
+        if($('#company_name').val()==''){
+            $.toast( "请输入所在公司","text");
+            return;
+        }
+        if($('#user_title').val()==''){
+            $.toast("请输入您的职位","text");
+            return;
+        }
+        $('#info_form').submit();
+    });
+</script>
+
 </body>
 </html>

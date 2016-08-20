@@ -22,26 +22,26 @@
             <table width="100%" style="table-layout:fixed;">
                 <tr>
                     <td rowspan="2" width="50px;">
-                        <img src="http://res.jian-hu.cn/static/img/default1.png" class="jian-me-img">
+                        <img src="http://res.jian-hu.cn/static/img/default1.png" class="jian-me-img" id="user_portrait">
                     </td>
                     <td>
-                        <div class="jian-me-name">
-                            叶宁容
+                        <div class="jian-me-name" id="user_name">
+
                         </div>
                     </td>
                     <td rowspan="2">
                         <a href="/user/edit_userinfo">
-                        <div class="jian-me-edit">
-                            编辑
-                        </div>
+                            <div class="jian-me-edit">
+                                修改
+                            </div>
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="jian-me-from">
-                            <font style="margin-right: 5px;">阿里巴巴</font> 
-                            <font style="margin-left: 5px;">杭州</font>
+                            <font style="margin-right: 5px;" id="user_company"></font>
+                            <font style="margin-left: 5px;" id="user_addr"></font>
                         </div>
                     </td>
                 </tr>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </a>
-        
+
         <a href="/user/recommand_list">
             <div class="jian-me-item">
                 <div class="weui-row">
@@ -109,13 +109,13 @@
             </div>
         </a>
 
-        <div style="margin: 40px 15px">
-            <a href="/">
-                <div style="width: 150px;text-align: center;border: 1px solid #8e8e8e;font-size: 18px;color: #8e8e8e;margin: 10px auto;padding: 8px;border-radius: 6px;">
-                    退出登录
-                </div>
-            </a>
-        </div>
+{#        <div style="margin: 40px 15px">#}
+{#            <a href="/">#}
+{#                <div style="width: 150px;text-align: center;border: 1px solid #8e8e8e;font-size: 18px;color: #8e8e8e;margin: 10px auto;padding: 8px;border-radius: 6px;">#}
+{#                    退出登录#}
+{#                </div>#}
+{#            </a>#}
+{#        </div>#}
 
     </div>
 
@@ -123,23 +123,33 @@
     <div class="weui_tabbar">
         <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
             <div class="jian-tabbar-item">
-                <img id="1" class="tab" src="http://res.jian-hu.cn/static/img/btn_nor_faxian@2x.png" width="100%" height="100%">
-            </div>            
+                <img id="1" class="tab" src="http://res.jian-hu.cn/static/img/btn_nor_faxian@2x.png" width="100%"
+                     height="100%">
+            </div>
         </a>
         <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
             <div class="jian-tabbar-item">
-                <img id="2" class="tab" src="http://res.jian-hu.cn/static/img/btn_nor_mesaage@2x.png" width="100%" height="100%">
-            </div>            
+                <img id="2" class="tab" src="http://res.jian-hu.cn/static/img/btn_nor_mesaage@2x.png" width="100%"
+                     height="100%">
+            </div>
         </a>
         <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
             <div class="jian-tabbar-item">
-                <img id="3" class="tab" src="http://res.jian-hu.cn/static/img/btn_pre_wd@2x.png" width="100%" height="100%">
-            </div>            
+                <img id="3" class="tab" src="http://res.jian-hu.cn/static/img/btn_pre_wd@2x.png" width="100%"
+                     height="100%">
+            </div>
         </a>
     </div>
 </div>
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
 <script src="http://res.jian-hu.cn/static/jquery-weui/dist/js/jquery-weui.js"></script>
 <script src="http://res.jian-hu.cn/static/dist/js/app-me.js"></script>
+<script type="text/javascript">
+    var user = {{ user | safe }}
+    $('#user_name').text(user.nick);
+    $('#user_company').text(user.company);
+    $('#user_addr').text(user.city);
+    $('#user_portrait').attr('src', user.portrait);
+</script>
 </body>
 </html>
