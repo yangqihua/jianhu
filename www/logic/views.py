@@ -8,6 +8,7 @@ import json
 import oss2
 import logging
 import requests
+import datetime
 from wx_base.backends.common import CommonHelper
 from settings import ALI_ACCESS_KEY, ALI_ACCESS_SECRET
 from wx_base.backends.dj import Helper, sns_userinfo
@@ -112,7 +113,7 @@ def post_job(request):
 	job.save()
 
 	if is_vip(user_id):
-		vip_job = VipJobList(job_id=job.id, user_id=user_id)
+		vip_job = VipJobList(job_id=job.id, user_id=user_id, pub_time=datetime.datetime.now())
 		vip_job.save()
 
 	url = "http://" + request.get_host() + request.path
