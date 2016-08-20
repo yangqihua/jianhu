@@ -26,6 +26,8 @@ from logic import views as logic_views
 urlpatterns = [
 
 	url(r'^get_job$', logic_views.get_job, name='get_job'),    #职位详情
+    url(r'^get_job_luyin$', logic_views.get_job_luyin, name='get_job_luyin'), #带录音的职位详情
+
 	url(r'^post_job$', logic_views.post_job, name='post_job'), #提交表单，发布职位
 	url(r'^fabu_job$', logic_views.fabu_job, name='fabu_job'), #发布职位
     url(r'^post_job_success$', logic_views.post_job_success, name='post_job_success'), #发布成功
@@ -33,4 +35,6 @@ urlpatterns = [
 
     url(r'^msg$', logic_views.msg, name='msg'), #首页消息
     url(r'^chat$', logic_views.chat, name='chat'), #聊天消息
+
+
 	]

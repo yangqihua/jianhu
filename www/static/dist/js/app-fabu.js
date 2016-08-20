@@ -92,10 +92,10 @@ $(".weui-row").on('click', '.jian-add-skill', function (event) {
 
 
 function myPrompt(_this) {
-    $.prompt("技能要求不能超过16个字符或不为空", "输入技能要求", function (_text) {
+    $.prompt("", "限16个字符且不为空", function (_text) {
         if (!isLimit(_text, 16) || (_text.trim()) == '') {
             myPrompt(_this);
-            $('.weui-prompt-text').css('color', 'red');
+            $('.weui_dialog_title').css('color', 'red');
         }
         else {
             curr_id = parseInt(_this.attr('id'));

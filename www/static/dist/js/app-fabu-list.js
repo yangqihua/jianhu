@@ -26,6 +26,6 @@ if(item_count>=5){        //元素个数大于这个值才启用滚到加载组�
 
 // edit-user.info.js
 $("#city-picker").cityPicker({
-    showDistrict: false
+    showDistrict: true
 
 });

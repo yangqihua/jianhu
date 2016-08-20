@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response, RequestContext
 from common import convert
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from models import Job, VipJobList
 import json
 import logging
@@ -101,12 +101,16 @@ def post_job(request):
 	if is_vip:
 		vip_job = VipJobList(job_id=job.id, user_id=user_id)
 		vip_job.save()
-	return render(request, 'job/job_success.html', {'job': job})
+	# return render(request, 'job/job_success.html', {'job': job})
+	return HttpResponseRedirect('/job/post_job_success')
 
 
 @sns_userinfo_with_userinfo
 def post_job_success(request):
-	return render_to_response('job/job_success.html')
+	url = "http://" + request.get_host() + request.path
+	sign = Helper.jsapi_sign(url)
+	sign["appId"] = WxPayConf_pub.APPID
+	return render_to_response('job/job_success.html', {"jsapi": json.dumps(sign)})
 
 
 @sns_userinfo_with_userinfo
@@ -125,3 +129,8 @@ def recommand_job(request):
 @sns_userinfo_with_userinfo
 def chat(request):
 	return render_to_response('chat/chat.html')
+
+
+@sns_userinfo_with_userinfo
+def get_job_luyin(request):
+	return render_to_response('job/job_detail_luyin.html')

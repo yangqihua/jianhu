@@ -51,7 +51,7 @@ def yingpin_detail(request):
 
 @sns_userinfo_with_userinfo
 def edit_userinfo(request):
-	info = {'title': '修改资料', 'tint': '请填写您的修改资料内容！'}
+	info = {'title': '编辑我的信息', 'tint': '真实信息，有利于相互信任！'}
 	return render_to_response('user/edit_userinfo.html', {'info': json.dumps(info)})
 
 
