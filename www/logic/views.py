@@ -5,8 +5,10 @@ from common import convert, str_tools
 from django.http import HttpResponse,HttpResponseRedirect
 from models import Job, VipJobList
 import json
+import oss2
 import logging
 import requests
+from wx_base.backends.common import CommonHelper
 from settings import ALI_ACCESS_KEY, ALI_ACCESS_SECRET
 from wx_base.backends.dj import Helper, sns_userinfo
 from wx_base import WeixinHelper, JsApi_pub, WxPayConf_pub, UnifiedOrder_pub, Notify_pub, catch

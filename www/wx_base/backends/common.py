@@ -1,24 +1,27 @@
 #coding=utf8
 import hmac
 import json
+import redis
 
 from settings import REDIS_WEIXIN
 from .. import WeixinHelper, class_property
 
+WEIXIN_REDIS_CLT = None
+
 class CommonHelper(object):
 
-    redis_clt = None
-
-    def get_redis():
-        if not redis_clt:
-            redis_clt = redis.StrictRedis(host=REDIS_WEIXIN[0], port=REDIS_WEIXIN[1], db=REDIS_WEIXIN[2])
-            return redis_clt
+    @classmethod
+    def get_redis(cls):
+        global WEIXIN_REDIS_CLT
+        if not WEIXIN_REDIS_CLT:
+            WEIXIN_REDIS_CLT = redis.StrictRedis(host=REDIS_WEIXIN[0], port=REDIS_WEIXIN[1], db=REDIS_WEIXIN[2])
+            return WEIXIN_REDIS_CLT
 
         # old connection, check it  缺乏redis异常处理流程
         # if not redis_clt.ping():
         #    redis_clt = redis.StrictRedis(host='localhost', port=6379, db=0) 
 
-        return redis_clt
+        return WEIXIN_REDIS_CLT
 
 
     @class_property
@@ -37,9 +40,9 @@ class CommonHelper(object):
         return "WEIXIN_JSAPI_TICKET"
 
 
-    @class_property
+    @classmethod
     def access_token(cls):
-        cache = get_redis()
+        cache = cls.get_redis()
         key = cls.access_token_key
         token = cache.get(key)
         if not token:
@@ -51,7 +54,7 @@ class CommonHelper(object):
 
     @class_property
     def jsapi_ticket(cls):
-        cache = get_redis()
+        cache = cls.get_redis()
         key = cls.jsapi_ticket_key
         ticket = cache.get(key)
         if not ticket:
