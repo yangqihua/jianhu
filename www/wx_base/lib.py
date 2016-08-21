@@ -11,6 +11,7 @@ import string
 import urllib
 import urllib2
 import hashlib
+import logging
 import threading
 import traceback
 import xml.etree.ElementTree as ET
@@ -214,6 +215,7 @@ class WeixinHelper(object):
         http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
         """
         _OAUTH_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect"
+        logging.error("[WXAPI]Fetch oauth2, url: %s", _OAUTH_URL)
         return _OAUTH_URL.format(WxPayConf_pub.APPID, urllib.quote(redirect_uri), scope, state)
 
     @classmethod
@@ -223,6 +225,7 @@ class WeixinHelper(object):
         http://mp.weixin.qq.com/wiki/11/0e4b294685f817b95cbed85ba5e82b8f.html
         """
         _ACCESS_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}"
+        logging.error("[WXAPI]Fetch AccessToken, url: %s", _ACCESS_URL)
         return HttpClient().get(_ACCESS_URL.format(WxPayConf_pub.APPID, WxPayConf_pub.APPSECRET))
 
 
@@ -232,6 +235,7 @@ class WeixinHelper(object):
         http://mp.weixin.qq.com/wiki/14/bb5031008f1494a59c6f71fa0f319c66.html
         """
         _USER_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang={2}"
+        logging.error("[WXAPI]Fetch Tencent UserInfo, url: %s", _USER_URL)
         return HttpClient().get(_USER_URL.format(access_token, openid, lang))
 
     @classmethod
@@ -240,6 +244,7 @@ class WeixinHelper(object):
         http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
         """
         _CODEACCESS_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={0}&secret={1}&code={2}&grant_type=authorization_code"
+        logging.error("[WXAPI]Fetch AccessTokenByCode, url: %s", _CODEACCESS_URL)
         return HttpClient().get(_CODEACCESS_URL.format(WxPayConf_pub.APPID, WxPayConf_pub.APPSECRET, code))
 
     @classmethod
@@ -248,6 +253,7 @@ class WeixinHelper(object):
         http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
         """
         _REFRESHTOKRN_URL = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={0}&grant_type=refresh_token&refresh_token={1}"
+        logging.error("[WXAPI]refreshAccessToken, url: %s", _REFRESHTOKRN_URL)
         return HttpClient().get(_REFRESHTOKRN_URL.format(WxPayConf_pub.APPID, refresh_token))
 
 
@@ -256,6 +262,7 @@ class WeixinHelper(object):
         """拉取用户信息(通过网页授权)
         """
         _SNSUSER_URL = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang={2}"
+        logging.error("[WXAPI]getSnsapiUserInfo, url: %s", _SNSUSER_URL)
         return HttpClient().get(_SNSUSER_URL.format(access_token, openid, lang))
 
     @classmethod
@@ -286,6 +293,7 @@ class WeixinHelper(object):
         """获取jsapi_tocket
         """
         _JSAPI_URL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi"
+        logging.error("[WXAPI]Fetch JsapiTicket, url: %s", _JSAPI_URL)
         return HttpClient().get(_JSAPI_URL.format(access_token))
 
 
@@ -301,3 +309,4 @@ class WeixinHelper(object):
         signature = '&'.join(['%s=%s' % (key.lower(), sign[key]) for key in sorted(sign)])
         sign["signature"] = hashlib.sha1(signature).hexdigest()
         return sign
+
