@@ -51,12 +51,11 @@ def get_job(request):
         logging.error('Cant find user_id by openid: %s when post_job' % request.openid)
         return HttpResponse("十分抱歉，获取用户信息失败，请重试。重试失败请联系客服人员")
 
-    data = {}
-
+    page_data = {}
     job_uuid = request.GET.get('job_uuid', '')
     job_detail = Job.objects.filter(uuid=job_uuid)[:1]
     if job_detail:
-		data = model_to_dict(job_detail, exclude=['is_vip', ])
+		page_data = model_to_dict(job_detail, exclude=['is_vip', ])
     else:
         logging.error("uid(%s) try to get not exsit job(%s), maybe attack" % (uid, job_uuid))
         return HttpResponse("十分抱歉，获取用户信息失败，请重试。重试失败请联系客服人员")
@@ -64,9 +63,9 @@ def get_job(request):
     url = "http://" + request.get_host() + request.path
     sign = Helper.jsapi_sign(url)
     sign["appId"] = WxPayConf_pub.APPID
-    data['jsapi'] = json.dumps(sign)
+    page_data['jsapi'] = json.dumps(sign)
 
-    return render_to_response('job/job_detail.html', data)
+    return render_to_response('job/job_detail.html', page_data)
 
 
 #暂时规避跨站攻击保护
@@ -131,16 +130,16 @@ def fabu_job(request):
 
     job_detail = Job.objects.filter(user_id=user_id)[:1][0]
 
-    data = {}
+    page_data = {}
     if job_detail:
-		data = model_to_dict(job_detail, exclude=['is_vip', 'is_valid', 'update_time', 'create_time'])
+		page_data = model_to_dict(job_detail, exclude=['is_vip', 'is_valid', 'update_time', 'create_time'])
 
     url = "http://" + request.get_host() + request.path
     sign = Helper.jsapi_sign(url)
     sign["appId"] = WxPayConf_pub.APPID
 
-    data['jsapi'] = json.dumps(sign)
-    return render_to_response('job/job_fabu.html', data)
+    page_data['jsapi'] = json.dumps(sign)
+    return render_to_response('job/job_fabu.html', page_data)
 
 
 @sns_userinfo_with_userinfo

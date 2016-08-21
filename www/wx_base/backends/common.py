@@ -6,6 +6,7 @@ import redis
 from settings import REDIS_WEIXIN
 from .. import WeixinHelper, class_property
 
+#经过测试，redis连接在网络断开，redisserver重启等情况下可以等待，在对方恢复后可以恢复工作
 WEIXIN_REDIS_CLT = None
 
 class CommonHelper(object):
@@ -16,10 +17,6 @@ class CommonHelper(object):
         if not WEIXIN_REDIS_CLT:
             WEIXIN_REDIS_CLT = redis.StrictRedis(host=REDIS_WEIXIN[0], port=REDIS_WEIXIN[1], db=REDIS_WEIXIN[2])
             return WEIXIN_REDIS_CLT
-
-        # old connection, check it  缺乏redis异常处理流程
-        # if not redis_clt.ping():
-        #    redis_clt = redis.StrictRedis(host='localhost', port=6379, db=0) 
 
         return WEIXIN_REDIS_CLT
 
@@ -39,11 +36,13 @@ class CommonHelper(object):
     def jsapi_ticket_key(cls):
         return "WEIXIN_JSAPI_TICKET"
 
+
     @class_property
     def clear_access_token(cls):
         cache = cls.get_redis()
         key = cls.access_token_key
         cache.delete(key)
+
 
     @class_property
     def access_token(cls):

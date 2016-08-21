@@ -7,6 +7,7 @@ import redis
 
 WEIXIN_REDIS_CLT = None
 
+#经过测试，redis连接在网络断开，redisserver重启等情况下可以等待，在对方恢复后可以恢复工作
 class TestRedis(object):
 
     def get_redis(self):
@@ -14,11 +15,7 @@ class TestRedis(object):
         if not WEIXIN_REDIS_CLT:
             WEIXIN_REDIS_CLT = redis.StrictRedis(host='139.196.140.181', port=6379, db=0)
             return WEIXIN_REDIS_CLT
-
-        # old connection, check it  缺乏redis异常处理流程
-        # if not redis_clt.ping():
-        #    redis_clt = redis.StrictRedis(host='localhost', port=6379, db=0) 
-
+        
         return WEIXIN_REDIS_CLT
 
 if __name__ == '__main__':
