@@ -39,6 +39,11 @@ class CommonHelper(object):
     def jsapi_ticket_key(cls):
         return "WEIXIN_JSAPI_TICKET"
 
+    @class_property
+    def clear_access_token(cls):
+        cache = cls.get_redis()
+        key = cls.access_token_key
+        cache.delete(key)
 
     @class_property
     def access_token(cls):
@@ -46,9 +51,10 @@ class CommonHelper(object):
         key = cls.access_token_key
         token = cache.get(key)
         if not token:
-            data = json.loads(WeixinHelper.getAccessToken())
+            data = WeixinHelper.getAccessToken()
             token, expire = data["access_token"], data["expires_in"]
-            cache.set(key, token, expire-cls.expire)
+            if token and expire:
+                cache.set(key, token, expire-cls.expire)
         return token
 
 

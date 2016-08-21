@@ -111,7 +111,6 @@ def paydetail(request):
 		return HttpResponse(jsApiParameters)
 
 
-
 FAIL, SUCCESS = "FAIL", "SUCCESS"
 
 
