@@ -11,7 +11,7 @@ from settings import ALI_ACCESS_KEY, ALI_ACCESS_SECRET
 class OSSTools(object):
 
     def __init__(self, bucket_name):
-        self.auth = oss2.Auth(ALI_ACCESS_KEY, ALI_ACCESS_SECRET)
+        auth = oss2.Auth(ALI_ACCESS_KEY, ALI_ACCESS_SECRET)
         self.bucket = oss2.Bucket(auth, 'http://oss-cn-shanghai.aliyuncs.com', bucket_name, connect_timeout=3)
 
     def upload_from_url(self, picname, url):
