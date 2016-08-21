@@ -91,7 +91,7 @@ def post_job(request):
 
 	auth = oss2.Auth(ALI_ACCESS_KEY, ALI_ACCESS_SECRET)
 	bucket = oss2.Bucket(auth, 'http://oss-cn-shanghai.aliyuncs.com', 'ugcres')
-	access_token = CommonHelper.access_token()
+	access_token = CommonHelper.access_token
 	for i in range(1, 7):
 		media_id = request.POST.get('img_url%s' % i)
 		if media_id:
