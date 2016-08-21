@@ -20,12 +20,7 @@ from django.contrib import admin
 
 import views
 import wx_views
-from user import views as user_views
 from logic import views as logic_views
-import logic
-
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [url(r'^admin/', admin.site.urls),
                url(r'^ping$', views.ping),  # 测试

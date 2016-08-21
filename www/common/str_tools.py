@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import uuid
 
 def gen_uuid():
