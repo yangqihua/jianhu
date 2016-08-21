@@ -63,7 +63,7 @@ class CommonHelper(object):
         key = cls.jsapi_ticket_key
         ticket = cache.get(key)
         if not ticket:
-            data = json.loads(WeixinHelper.getJsapiTicket(cls.access_token))
+            data = WeixinHelper.getJsapiTicket(cls.access_token)
             ticket, expire = data["ticket"], data["expires_in"]
             cache.set(key, ticket, expire-cls.expire)
         return ticket

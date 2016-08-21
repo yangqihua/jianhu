@@ -205,7 +205,7 @@ def WeixinApiDealResultWrapper(func):
                 #目前不清楚这里会不会有连接泄漏的问题
                 redis_clt = redis.StrictRedis(host=settings.REDIS_WEIXIN[0], port=settings.REDIS_WEIXIN[1], db=settings.REDIS_WEIXIN[2])
                 redis_clt.delete('WEIXIN_ACCESS_TOKEN')
-        return result
+        return decodejson
     return deal_result
 
 class WeixinHelper(object):
