@@ -17,8 +17,6 @@ Including another URLconf
 
 from django.conf.urls import url
 
-import views
-import wx_views
 from user import views as user_views
 
 urlpatterns = [

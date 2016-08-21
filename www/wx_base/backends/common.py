@@ -40,7 +40,7 @@ class CommonHelper(object):
         return "WEIXIN_JSAPI_TICKET"
 
 
-    @classmethod
+    @class_property
     def access_token(cls):
         cache = cls.get_redis()
         key = cls.access_token_key

@@ -3,8 +3,7 @@
 from django.shortcuts import render, render_to_response
 
 import logging, json
-import datetime
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from user.models import Bind, Profile, ProfileExt
 from user_tools import sns_userinfo_with_userinfo, get_userid_by_openid
 
@@ -56,6 +55,8 @@ def edit_userinfo(request):
 
 
 from django.views.decorators.csrf import csrf_exempt
+
+
 @csrf_exempt
 @sns_userinfo_with_userinfo
 def post_userinfo(request):
@@ -84,10 +85,9 @@ def post_userinfo(request):
 	return HttpResponseRedirect('/user/me')
 
 	# if profile.save() and profile_ext.save():
-	#   return HttpResponseRedirect('/user/me')
+	# return HttpResponseRedirect('/user/me')
 	# else:
-	# 	return HttpResponseRedirect('/user/edit_userinfo')
-
+	#     return HttpResponseRedirect('/user/edit_userinfo')
 
 
 @sns_userinfo_with_userinfo
