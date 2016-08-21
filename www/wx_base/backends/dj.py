@@ -55,10 +55,10 @@ def sns_userinfo_callback(callback=None):
 					current = "http://" + request.get_host() + request.get_full_path()
 					return redirect(WeixinHelper.oauth2(current))
 				else:
-					data = json.loads(WeixinHelper.getAccessTokenByCode(code))
+					data = WeixinHelper.getAccessTokenByCode(code)
 					access_token, openid, refresh_token = data["access_token"], data["openid"], data["refresh_token"]
 					# WeixinHelper.refreshAccessToken(refresh_token)
-					userinfo = json.loads(WeixinHelper.getSnsapiUserInfo(access_token, openid))
+					userinfo = WeixinHelper.getSnsapiUserInfo(access_token, openid)
 			else:
 				# 通过opendid来判断，是否有不安全的因素？
 				ok, openid = Helper.check_cookie(openid)

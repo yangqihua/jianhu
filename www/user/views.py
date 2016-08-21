@@ -94,8 +94,12 @@ def me(request):
         info = {'title': '完善资料', 'tint': '请先完善您的资料吧！'}
         return render_to_response('user/edit_userinfo.html', {'info': json.dumps(info)})
     else:
-        profile_ext = ProfileExt.objects.filter(user_id=user_id)[0]
+        city = ''
+        profile_ext = ProfileExt.objects.filter(user_id=user_id)[:1]
+        if profile_ext:
+           city = profile_ext[0].city 
+
         user = {'nick': profile.real_name, 'portrait': profile.portrait, 'company': profile.company_name,
-                'city': profile_ext.city}
+                'city': city}
         return render_to_response('user/me.html', {'user': json.dumps(user)})
 
