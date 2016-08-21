@@ -3,10 +3,10 @@
 import uuid
 
 def gen_uuid():
-    return uuid.uuid3(uuid.NAMESPACE_DNS, 'jianhu-www')
+    return uuid.uuid4()
 
 def gen_short_uuid():
-    uuid_str = str(uuid.uuid3(uuid.NAMESPACE_DNS, 'jianhu-www'))
+    uuid_str = str(uuid.uuid4())
     return uuid_str.replace('-', '')
 
 if __name__ == '__main__':
