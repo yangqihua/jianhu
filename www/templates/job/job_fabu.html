@@ -93,11 +93,6 @@
                         </div>
 
                         <div class="weui-col-50">
-{#                            <a href="#">#}
-{#                                <div class="jian-form-edit-btn">#}
-{#                                    编辑#}
-{#                                </div>#}
-{#                            </a>#}
 
                             <a href="#">
                                 <div class="jian-form-cancel-btn" style="display: none">
@@ -166,9 +161,6 @@
                             </div>
                         </div>
                         <div style="">
-{#                            <div class="jian-form-edit-btn">#}
-{#                                编辑#}
-{#                            </div>#}
                         </div>
                     </div>
                     <div class="weui-row" style="overflow: hidden;">
@@ -229,49 +221,49 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <script type="text/javascript">
-{#    var jsapi = {{ jsapi|safe }};#}
-{#        // console.log(jsapi);#}
-{#        wx.config({#}
-{#            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。#}
-{#            appId: jsapi.appId, // 必填，公众号的唯一标识#}
-{#            timestamp: jsapi.timestamp, // 必填，生成签名的时间戳#}
-{#            nonceStr: jsapi.nonceStr, // 必填，生成签名的随机串#}
-{#            signature: jsapi.signature,// 必填，签名，见附录1#}
-{#            jsApiList: [#}
-{#                'chooseImage',#}
-{#                'uploadImage'#}
-{#            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2#}
-{#        });#}
-{#        wx.ready(function () {#}
-{#            $(".weui-row").on('click', '.weui_uploader_input', function (event) {#}
-{#                var _this = $(event.target);#}
-{#                var img_url = "img_url"+(_this.parent().parent().attr('id').substring(6, 7));#}
-{#                if ($('.jian-upload-label .jian-form-edit-btn').text() == '确定') {#}
-{#                    $.toptip('请先确定', 'warning');#}
-{#                } else {#}
-{#                    wx.chooseImage({#}
-{#                        count: 1, // 默认9#}
-{#                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有#}
-{#                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有#}
-{#                        success: function (res) {#}
-{#                            var localIds = res.localIds;#}
-{#                            addImg(_this, localIds[0]);#}
-{#                            wx.uploadImage({#}
-{#                                localId: localIds[0], #}
-{#                                isShowProgressTips: 1, // 默认为1，显示进度提示#}
-{#                                success: function (res) {#}
-{#                                    console.log(img_url);#}
-{#                                    $('.'+img_url).val(res.serverId); // 返回图片的服务器端ID#}
-{#                                },#}
-{#                                fail: function(res) {#}
-{#                                    $.alert('上传失败');#}
-{#                                }#}
-{#                            });#}
-{#                        }#}
-{#                    });#}
-{#                }#}
-{#            });#}
-{#        });#}
+    var jsapi = {{ jsapi|safe }};
+        // console.log(jsapi);
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: jsapi.appId, // 必填，公众号的唯一标识
+            timestamp: jsapi.timestamp, // 必填，生成签名的时间戳
+            nonceStr: jsapi.nonceStr, // 必填，生成签名的随机串
+            signature: jsapi.signature,// 必填，签名，见附录1
+            jsApiList: [
+                'chooseImage',
+                'uploadImage'
+            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function () {
+            $(".weui-row").on('click', '.weui_uploader_input', function (event) {
+                var _this = $(event.target);
+                var img_url = "img_url"+(_this.parent().parent().attr('id').substring(6, 7));
+                if ($('.jian-upload-label .jian-form-edit-btn').text() == '确定') {
+                    $.toptip('请先确定', 'warning');
+                } else {
+                    wx.chooseImage({
+                        count: 1, // 默认9
+                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                        success: function (res) {
+                            var localIds = res.localIds;
+                            addImg(_this, localIds[0]);
+                            wx.uploadImage({
+                                localId: localIds[0],
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    console.log(img_url);
+                                    $('.'+img_url).val(res.serverId); // 返回图片的服务器端ID
+                                },
+                                fail: function(res) {
+                                    $.alert('上传失败');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
 
 </script>
 </body>

@@ -1,49 +1,11 @@
-/*
- ///获取父类元素
- jQuery.parent(expr) 找父亲节点，可以传入expr进行过滤，比如$("span").parent()或者$("span").parent(".class")
- jQuery.parents(expr),类似于jQuery.parents(expr),但是是查找所有祖先元素，不限于父元素
 
-
- ///获取兄弟元素
- $('#id').siblings()   当前元素所有的兄弟节点
- $('#id').prev()       当前元素前一个兄弟节点
- $('#id').prevaAll()   当前元素之前所有的兄弟节点
- $('#id').next()       当前元素之后第一个兄弟节点
- $('#id').nextAll()    当前元素之后所有的兄弟节点
- 这三个方法都可以添加选择器，给出选择条件，就能找到你指定的兄弟节点了。
-
-
- //获取子孙元素
- jQuery.children(expr).返回所有子节点，这个方法只会返回直接的孩子节点，不会返回所有的子孙节点
-
- jQuery.contents(),返回下面的所有内容，包括节点和文本。这个方法和children()的区别就在于，
- 包括空白文本，也会被作为一个 jQuery对象返回，children()则只会返回节点
-
- Query.find(expr),跟jQuery.filter(expr)完全不一样。jQuery.filter()是从初始的jQuery对象
- 集合中筛选出一部分，而jQuery.find()的返回结果，不会有初始集合中的内容，
- 比如$("p"),find("span"),是从元素开始找,等同于$("p span")
- */
-
-$(".weui-row").on('click', '.jian-form-edit-btn', function (event) {
-
-    var _this = $(event.target);
-    if (_this.html() == '确定') {
-        $('.jian-skill-clear').css('display', 'none');
-        _this.html('编辑');
-        $('.jian-form-cancel-btn').css('display', 'none');
-    } else {
-        $('.jian-skill-clear').css('display', 'block');
-        _this.html('确定');
-    }
-    ;
-});
 
 $('.weui-col-33').on('click','.jian-form-edit', function (event) {
     var _this = $(this);
     if(_this.hasClass('jian-add-skill')){
         return;
     }
-    alert(_this.attr('id'));
+    _this.next().toggle();
 });
 
 
@@ -66,11 +28,13 @@ $(".weui-row").on('click', '.jian-skill-clear', function (event) {
                 $('#6').next().remove();
             } else {
                 $('#' + i).html($('#' + (i + 1)).html());
+                //$('#' + i).next().toggle();
             }
         } else {
             $('#' + i).html($('#' + (i + 1)).html());
         }
     }
+    $('#' + curr_id).next().toggle();
 });
 
 
@@ -136,17 +100,12 @@ $(".jian-fabu-btn").on('click', '', function (event) {
 
 
 //编辑图片
-$(".jian-upload-label").on('click', '.jian-form-edit-btn', function (event) {
-    var _this = $(event.target);
-    if (_this.html() == '确定') {
-        $('.jian-img-clear').css('display', 'none');
-        _this.html('编辑');
-        $('.jian-form-cancel-btn').css('display', 'none');
-    } else {
-        $('.jian-img-clear').css('display', 'block');
-        _this.html('确定');
+$('.weui-col-33').on('click','.mimg', function (event) {
+    var _this = $(this);
+    if(_this.hasClass('weui_uploader_input_wrp')){
+        return;
     }
-    ;
+   _this.next().toggle();
 });
 
 
