@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # from django.db import transaction
 from django.shortcuts import render, render_to_response
-
+from django.http import HttpResponse
 import logging, json
 from django.http import HttpResponseRedirect
 from user.models import Bind, Profile, ProfileExt
+from logic.models import Job
 from user_tools import sns_userinfo_with_userinfo, get_userid_by_openid
+from common import convert, str_tools
 
 
 @sns_userinfo_with_userinfo
@@ -20,7 +22,24 @@ def collection_list(request):
 
 @sns_userinfo_with_userinfo
 def fabu_list(request):
-	return render_to_response('user/fabu_list.html')
+	user_id = get_userid_by_openid(request.openid)
+	job_from_point = convert.str_to_int(request.GET.get('from', '0'), 0)  # 有from时，则为翻页，无时，则为首页
+	number_limit = convert.str_to_int(request.GET.get('limit', '5'), 5)  # 异常情况下，或者不传的情况下，默认为10
+	jobs = Job.objects.filter(user_id=user_id).order_by('-id')[job_from_point:number_limit + job_from_point]
+	job_list = []
+	profile = Profile.objects.filter(id=user_id)[0]
+	username = profile.real_name
+	portrait = profile.portrait
+	for my_job in jobs:
+		city = my_job.city.split(' ', 1)[1]
+		job = {'city': city, 'company_name': my_job.company_name, 'job_title': my_job.job_title,
+		       'education': my_job.education, 'work_experience': my_job.work_experience, 'salary': my_job.salary,
+		       'create_time': convert.format_time(my_job.create_time), 'username': username, 'portrait': portrait}
+		job_list.append(job)
+	if job_from_point == 0:  # 首页，需要返回页面
+		return render_to_response('user/fabu_list.html', {'job_list': json.dumps(job_list)})
+	else:  # 加载下一页，ajax请求
+		return HttpResponse(json.dumps(job_list), content_type='application/json')
 
 
 @sns_userinfo_with_userinfo
@@ -84,10 +103,11 @@ def post_userinfo(request):
 	profile_ext.save()
 	return HttpResponseRedirect('/user/me')
 
-	# if profile.save() and profile_ext.save():
-	# return HttpResponseRedirect('/user/me')
-	# else:
-	#     return HttpResponseRedirect('/user/edit_userinfo')
+
+# if profile.save() and profile_ext.save():
+# return HttpResponseRedirect('/user/me')
+# else:
+# return HttpResponseRedirect('/user/edit_userinfo')
 
 
 @sns_userinfo_with_userinfo

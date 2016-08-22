@@ -94,7 +94,7 @@ def post_job(request):
         media_id = request.POST.get('img_url%s' % i)
         if media_id:
             url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=%s&media_id=%s" % (access_token, media_id)
-            picname = str_tools.gen_short_uuid()
+            picname = str_tools.gen_short_uuid()+".jpg"
             OSSUgcRes.upload_from_url(picname, url)
             if piclist:
                 piclist = '%s,%s' % (piclist, picname)

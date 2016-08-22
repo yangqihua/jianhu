@@ -24,16 +24,6 @@
  比如$("p"),find("span"),是从元素开始找,等同于$("p span")
  */
 
-
-
-
-// $('body').on('click',function(event){
-// 	$('.jian-skill-clear').css('display','none');
-// });
-
-// var skills = [];
-// skills[1] = '<img src="http://res.jian-hu.cn/static/img/add@2x.png" height="16px">';
-//编辑技能
 $(".weui-row").on('click', '.jian-form-edit-btn', function (event) {
 
     var _this = $(event.target);
@@ -46,6 +36,14 @@ $(".weui-row").on('click', '.jian-form-edit-btn', function (event) {
         _this.html('确定');
     }
     ;
+});
+
+$('.weui-col-33').on('click','.jian-form-edit', function (event) {
+    var _this = $(this);
+    if(_this.hasClass('jian-add-skill')){
+        return;
+    }
+    alert(_this.attr('id'));
 });
 
 
@@ -199,7 +197,7 @@ function addImg(_this, img_src) {
 }
 
 $("#city-picker").cityPicker({
-    showDistrict: false
+    showDistrict: true
 });
 
 

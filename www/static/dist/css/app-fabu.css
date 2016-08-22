@@ -70,7 +70,7 @@ html, body {
 	font-size: 12px;
 	color: #8e8e8e;
 	width: 100%;
-	/*position: relative;*/
+
 
 	display:block;/*内联对象需加*/ 
 	word-break:keep-all;/* 不换行 */ 
