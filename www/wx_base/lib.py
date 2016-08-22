@@ -6,6 +6,7 @@ Created on 2014-5-13
 '''
 import json
 import time
+import redis
 import random
 import string
 import urllib
@@ -14,6 +15,7 @@ import hashlib
 import logging
 import threading
 import traceback
+import settings
 import xml.etree.ElementTree as ET
 
 from functools import wraps
@@ -189,8 +191,25 @@ class HttpClient(Singleton, BaseHttpClient):
             print("HTTP_CLIENT config error, Use 'URLLIB'")
             return UrllibClient
 
+def WeixinApiDealResultWrapper(func):
+    def deal_result(*args, **kw):  
+        result = func(*args, **kw) 
+        try:
+            decodejson = json.loads(result)
+        except Exception,e:  
+            logging.error("Error Ret: %s   Exception: %s" % (result, e))
+    
+        if ('errcode' in decodejson) and (decodejson['errcode'] > 0):
+            logging.error('[WXAPI]Error: %s' % result)
+            if decodejson['errcode'] == 40001:
+                #目前不清楚这里会不会有连接泄漏的问题
+                redis_clt = redis.StrictRedis(host=settings.REDIS_WEIXIN[0], port=settings.REDIS_WEIXIN[1], db=settings.REDIS_WEIXIN[2])
+                redis_clt.delete('WEIXIN_ACCESS_TOKEN')
+        return decodejson
+    return deal_result
 
 class WeixinHelper(object):
+
     @classmethod
     def checkSignature(cls, signature, timestamp, nonce):
         """微信对接签名校验"""
@@ -215,10 +234,10 @@ class WeixinHelper(object):
         http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
         """
         _OAUTH_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope={2}&state={3}#wechat_redirect"
-        logging.error("[WXAPI]Fetch oauth2, url: %s", _OAUTH_URL)
         return _OAUTH_URL.format(WxPayConf_pub.APPID, urllib.quote(redirect_uri), scope, state)
 
     @classmethod
+    @WeixinApiDealResultWrapper
     def getAccessToken(cls):
         """获取access_token
         需要缓存access_token,由于缓存方式各种各样，不在此提供
@@ -228,8 +247,8 @@ class WeixinHelper(object):
         logging.error("[WXAPI]Fetch AccessToken, url: %s", _ACCESS_URL)
         return HttpClient().get(_ACCESS_URL.format(WxPayConf_pub.APPID, WxPayConf_pub.APPSECRET))
 
-
     @classmethod
+    @WeixinApiDealResultWrapper
     def getUserInfo(cls, access_token, openid, lang="zh_CN"):
         """获取用户基本信息
         http://mp.weixin.qq.com/wiki/14/bb5031008f1494a59c6f71fa0f319c66.html
@@ -238,7 +257,9 @@ class WeixinHelper(object):
         logging.error("[WXAPI]Fetch Tencent UserInfo, url: %s", _USER_URL)
         return HttpClient().get(_USER_URL.format(access_token, openid, lang))
 
+
     @classmethod
+    @WeixinApiDealResultWrapper
     def getAccessTokenByCode(cls, code):
         """通过code换取网页授权access_token, 该access_token与getAccessToken()返回是不一样的
         http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
@@ -248,6 +269,7 @@ class WeixinHelper(object):
         return HttpClient().get(_CODEACCESS_URL.format(WxPayConf_pub.APPID, WxPayConf_pub.APPSECRET, code))
 
     @classmethod
+    @WeixinApiDealResultWrapper
     def refreshAccessToken(cls, refresh_token):
         """刷新access_token, 使用getAccessTokenByCode()返回的refresh_token刷新access_token，可获得较长时间有效期
         http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html
@@ -256,8 +278,8 @@ class WeixinHelper(object):
         logging.error("[WXAPI]refreshAccessToken, url: %s", _REFRESHTOKRN_URL)
         return HttpClient().get(_REFRESHTOKRN_URL.format(WxPayConf_pub.APPID, refresh_token))
 
-
     @classmethod
+    @WeixinApiDealResultWrapper
     def getSnsapiUserInfo(cls, access_token, openid, lang="zh_CN"):
         """拉取用户信息(通过网页授权)
         """
@@ -289,13 +311,13 @@ class WeixinHelper(object):
         return cls.send(data, access_token)
 
     @classmethod
+    @WeixinApiDealResultWrapper
     def getJsapiTicket(cls, access_token):
         """获取jsapi_tocket
         """
         _JSAPI_URL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi"
         logging.error("[WXAPI]Fetch JsapiTicket, url: %s", _JSAPI_URL)
         return HttpClient().get(_JSAPI_URL.format(access_token))
-
 
     @classmethod
     def jsapiSign(cls, jsapi_ticket, url):

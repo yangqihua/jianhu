@@ -14,7 +14,9 @@ class Job(models.Model):
     work_experience = models.CharField(max_length=10)
     salary = models.CharField(max_length=10)
     education = models.CharField(max_length=10)
-    city = models.CharField(max_length=10)
+    province = models.CharField(max_length=18, default='')
+    city = models.CharField(max_length=18, default='')
+    district = models.CharField(max_length=18, default='')
     skill = models.CharField(max_length=120)
     piclist = models.CharField(max_length=256)
     is_valid = models.BooleanField(default=True)
@@ -28,6 +30,7 @@ class Job(models.Model):
         return self.job_title
 
 
+#请确定已有的会更新时间
 class VipJobList(models.Model):
     job_id = models.IntegerField()
     user_id = models.IntegerField(primary_key=True)
@@ -62,6 +65,7 @@ class Conversation(models.Model):
         db_table = "conversation"
 
 
+ #需求变更,这块后续再考虑是否更改
 class MergeMsg(models.Model):
     user_id = models.IntegerField(db_index=True)
     from_user_id = models.IntegerField()
