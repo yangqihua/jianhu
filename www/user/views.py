@@ -69,16 +69,22 @@ def post_userinfo(request):
     city = request.POST.get('city')
 
     # 更新profile表 ,更新两个表应该用事务，这里暂时放下
-    profile = Profile.objects.filter(id=user_id)[0]
+    profiles = Profile.objects.filter(id=user_id)[:1]
+    if not profiles:
+        return HttpResponse("十分抱歉，获取用户信息失败，请联系客服人员")
+ 
+    profile = profiles[0]
     profile.real_name = real_name
     profile.company_name = company_name
     profile.title = title
     profile.save()
 
     # 更新profile_ext表
-    profile_ext = ProfileExt.objects.filter(user_id=user_id)[0]
-    profile_ext.city = city
-    profile_ext.save()
+    profile_exts = ProfileExt.objects.filter(user_id=user_id)[:1]
+    if profile_exts:
+        profile_ext = profile_exts[0]
+        profile_ext.city = city
+        profile_ext.save()
     return HttpResponseRedirect('/user/me')
 
 
@@ -89,7 +95,11 @@ def me(request):
         logging.error('Cant find user_id by openid: %s when post_job' % request.openid)
         return HttpResponse("十分抱歉，获取用户信息失败，请重试。重试失败请联系客服人员")
 
-    profile = Profile.objects.filter(id=user_id)[0]
+    profiles = Profile.objects.filter(id=user_id)[:1]
+    if not profiles:
+        return HttpResponse("十分抱歉，获取用户信息失败，请联系客服人员")
+
+    profile = profiles[0]
     if profile.real_name == '':
         info = {'title': '完善资料', 'tint': '请先完善您的资料吧！'}
         return render_to_response('user/edit_userinfo.html', {'info': json.dumps(info)})

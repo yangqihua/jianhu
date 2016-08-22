@@ -128,11 +128,15 @@ def fabu_job(request):
         logging.error('Cant find user_id by openid: %s when post_job' % request.openid)
         return HttpResponse("十分抱歉，获取用户信息失败，请重试。重试失败请联系客服人员")
 
-    job_detail = Job.objects.filter(user_id=user_id)[:1][0]
+    job_details = Job.objects.filter(user_id=user_id)[:1]
+    if not job_details:
+        return HttpResponse("十分抱歉，获取失败,请联系客服人员")
+
+    job_detail = job_details[0]
 
     page_data = {}
     if job_detail:
-		page_data = model_to_dict(job_detail, exclude=['is_vip', 'is_valid', 'update_time', 'create_time'])
+        page_data = model_to_dict(job_detail, exclude=['is_vip', 'is_valid', 'update_time', 'create_time'])
 
     url = "http://" + request.get_host() + request.path
     sign = Helper.jsapi_sign(url)
