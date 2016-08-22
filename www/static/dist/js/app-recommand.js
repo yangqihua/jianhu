@@ -1,7 +1,7 @@
 $('.chonglu1').on('click', function(event) {
   var _this = $(event.target);
-	$.confirm("重录将删除之前的录音", "提示", function() {
-      	$('#luyin1').attr('src','http://res.jian-hu.cn/static/img/luyin@2x.png');
+    $.confirm("重录将删除之前的录音", "提示", function() {
+          $('#luyin1').attr('src','http://res.jian-hu.cn/static/img/luyin@2x.png');
         _this.parent().parent().parent().prev().html("点击开始录音，最多录60秒");
         _this.parent().parent().prev().prev().html("");
         _this.parent().html("");
@@ -11,7 +11,7 @@ $('.chonglu1').on('click', function(event) {
 });
 
 $('.chonglu2').on('click', function(event) {
-	var _this = $(event.target);
+    var _this = $(event.target);
   $.confirm("重录将删除之前的录音", "提示", function() {
         $('#luyin2').attr('src','http://res.jian-hu.cn/static/img/luyin@2x.png');
         _this.parent().parent().parent().prev().html("点击开始录音，最多录60秒");
@@ -31,7 +31,7 @@ $('.jian-fasong-btn').on('click', function(event) {
 });
 
 $('#luyin1').on('click', function(event) {
-	  var _this = $(event.target);
+      var _this = $(event.target);
     //1.更新点击录音图片，实现360度旋转
     _this.attr('src', 'http://res.jian-hu.cn/static/img/luyinzhong@3x.gif');
     //2.更新点击开始录音文本

@@ -55,7 +55,7 @@ def get_job(request):
     job_uuid = request.GET.get('job_uuid', '')
     job_detail = Job.objects.filter(uuid=job_uuid)[:1]
     if job_detail:
-		page_data = model_to_dict(job_detail, exclude=['is_vip', ])
+        page_data = model_to_dict(job_detail, exclude=['is_vip', ])
     else:
         logging.error("uid(%s) try to get not exsit job(%s), maybe attack" % (uid, job_uuid))
         return HttpResponse("十分抱歉，获取用户信息失败，请重试。重试失败请联系客服人员")

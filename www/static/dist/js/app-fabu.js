@@ -28,7 +28,7 @@
 
 
 // $('body').on('click',function(event){
-// 	$('.jian-skill-clear').css('display','none');
+//     $('.jian-skill-clear').css('display','none');
 // });
 
 // var skills = [];
