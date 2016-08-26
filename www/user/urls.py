@@ -33,4 +33,7 @@ urlpatterns = [
 
                url(r'^edit_userinfo$', user_views.edit_userinfo, name="edit_userinfo"),
                url(r'^post_userinfo$', user_views.post_userinfo, name="post_userinfo"),
+
+
+               url(r'^ajax_toggle_job', user_views.ajax_toggle_job, name="ajax_toggle_job"),
                ]

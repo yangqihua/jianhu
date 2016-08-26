@@ -34,4 +34,6 @@ urlpatterns = [
 
 	url(r'^msg$', logic_views.msg, name='msg'),  #首页消息
 	url(r'^chat$', logic_views.chat, name='chat'),  #聊天消息
+
+	url(r'^ajax_collection$', logic_views.ajax_collection, name='ajax_collection'),  #收藏的ajax操作
 	 ]

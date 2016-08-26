@@ -78,4 +78,3 @@ class MergeMsg(models.Model):
 
     class Meta:
         db_table = "merge_msg"
-

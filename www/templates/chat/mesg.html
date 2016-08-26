@@ -1,140 +1,136 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>荐乎</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    <link rel="stylesheet" href="http://res.jian-hu.cn/static/jquery-weui/dist/lib/weui.css">
-    <link rel="stylesheet" href="http://res.jian-hu.cn/static/jquery-weui/dist/css/jquery-weui.css">
-    <link rel="stylesheet" href="http://res.jian-hu.cn/static/dist/css/app-mesg.css">
-</head>
+{% extends "base/base.html" %}
+{% block parent_css %}
+<link rel="stylesheet" href="http://res.jian-hu.cn/static/dist/css/app-mesg.css">
+{% endblock %}
 
-<body>
-<div class="weui_tab">
-    <div class="weui_navbar jian-title">
-        <img src="http://res.jian-hu.cn/static/img/jianhu@2x.png" height="30px" width="52px" style="margin: 7px auto;">
+{% block header_left %}
+{% endblock %}
+{% block header %}
+    <div class="jian-header-middle">
+        我的消息
     </div>
-    <!--以 weui_tab_bd 作为外部容器，下拉刷新、滚动加载控件必须在这个容器的之中-->
+{% endblock %}
+{% block header_right %}
+{% endblock %}
+{% block content %}
     <div class="weui_tab_bd" style="margin-top: -42px;padding-top: 87px;background-color: #ebebeb;">
         <div class="jian-item-space"></div>
         <div style="background-color: #ffffff;">
             <!-- item begin  -->
             <a href="/chat/chat">
-            <div class="jian-chat-item">
-                <table width="100%" style="table-layout:fixed;">
-                    <tr>
-                        <td rowspan="2" valign="top" width="40px;">
-                            <img src="http://res.jian-hu.cn/static/img/default1.png" class="jian-chat-img">
-                            <div style="position: absolute;top: 36px;left: 14px;background-color: #c773ff;color: #ffffff;width: 40px;height: 14px;font-size: 12px;text-align: center;line-height: 14px;">伯乐</div>
-                        </td>
-                        <td>
-                            <div class="jian-chat-name">
-                                李白
-                            </div>
-                        </td>
-                        <td>
-                            <div class="jian-chat-time">
-                                2013-06-23 18:23
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                        <div class="jian-chat-content">
-                            快来听听吧！
-                        </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                <div class="jian-chat-item">
+                    <table width="100%" style="table-layout:fixed;">
+                        <tr>
+                            <td rowspan="2" valign="top" width="40px;">
+                                <img src="http://res.jian-hu.cn/static/img/default1.png" class="jian-chat-img">
+
+                                <div style="position: absolute;top: 36px;left: 14px;background-color: #c773ff;color: #ffffff;width: 40px;height: 14px;font-size: 12px;text-align: center;line-height: 14px;">
+                                    伯乐
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-name">
+                                    李白
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-time">
+                                    2013-06-23 18:23
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="jian-chat-content">
+                                    快来听听吧！
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </a>
             <!-- item end -->
 
             <!-- item begin  -->
             <a href="/chat/chat">
-            <div class="jian-chat-item">
-                <table width="100%" style="table-layout:fixed;">
-                    <tr>
-                        <td rowspan="2" valign="top" width="40px;">
-                        <img src="http://res.jian-hu.cn/static/img/default1.png" class="jian-chat-img">
-                        </td>
-                        <td>
-                            <div class="jian-chat-name">
-                                北方的南蛮
-                            </div>
-                        </td>
-                        <td>
-                            <div class="jian-chat-time">
-                                2013-06-23 18:23
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                        <div class="jian-chat-content">
-                            你好，我对你发布的职位非常感的职位非常感兴的职位非常感兴的职位非常感兴的职位非常感兴的职位非常感兴兴的职位非常感兴的职位非常感兴的职位非常感兴趣
-                        </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                <div class="jian-chat-item">
+                    <table width="100%" style="table-layout:fixed;">
+                        <tr>
+                            <td rowspan="2" valign="top" width="40px;">
+                                <img src="http://res.jian-hu.cn/static/img/default1.png" class="jian-chat-img">
+
+                                <div style="position: absolute;top: 36px;left: 14px;background-color: #c773ff;color: #ffffff;width: 40px;height: 14px;font-size: 12px;text-align: center;line-height: 14px;">
+                                    千里马
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-name">
+                                    杜甫
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-time">
+                                    2013-06-23 18:23
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="jian-chat-content">
+                                    快来听听吧！
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </a>
             <!-- item end -->
 
             <!-- item begin  -->
             <a href="/chat/chat">
-            <div class="jian-chat-item">
-                <table width="100%" style="table-layout:fixed;">
-                    <tr>
-                        <td rowspan="2" valign="top" width="40px;">
-                        <img src="http://res.jian-hu.cn/static/img/default.jpg" class="jian-chat-img">
-                        </td>
-                        <td>
-                            <div class="jian-chat-name">
-                                叶圣陶
-                            </div>
-                        </td>
-                        <td>
-                            <div class="jian-chat-time">
-                                2013-06-23 18:23
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                        <div class="jian-chat-content">
-                            请问您的联系方式
-                        </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                <div class="jian-chat-item">
+                    <table width="100%" style="table-layout:fixed;">
+                        <tr>
+                            <td rowspan="2" valign="top" width="40px;">
+                                <img src="http://res.jian-hu.cn/static/img/default.jpg" class="jian-chat-img">
+                                <div style="position: absolute;top: 36px;left: 14px;background-color: #c773ff;color: #ffffff;width: 40px;height: 14px;font-size: 12px;text-align: center;line-height: 14px;">
+                                    主公
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-name">
+                                    叶圣陶
+                                </div>
+                            </td>
+                            <td>
+                                <div class="jian-chat-time">
+                                    2013-06-23 18:23
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="jian-chat-content">
+                                    请问您的联系方式
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </a>
             <!-- item end -->
         </div>
     </div>
+{% endblock %}
 
+{% block tabbar1 %}
+    http://res.jian-hu.cn/static/img/btn_nor_faxian@2x.png
+{% endblock %}
 
-    <div class="weui_tabbar">
-        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
-            <div class="jian-tabbar-item">
-                <img id="1" class="tab" src="http://res.jian-hu.cn/static/img/btn_nor_faxian@2x.png" width="100%" height="100%">
-            </div>            
-        </a>
-        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
-            <div class="jian-tabbar-item">
-                <img id="2" class="tab" src="http://res.jian-hu.cn/static/img/btn_pre_mesaage@2x.png" width="100%" height="100%">
-            </div>            
-        </a>
-        <a href="javascript:;" class="weui_tabbar_item" style="padding-top: 0">
-            <div class="jian-tabbar-item">
-                <img id="3" class="tab" src="http://res.jian-hu.cn/static/img/btn_nor_wd@2x.png" width="100%" height="100%">
-            </div>            
-        </a>
-    </div>
-</div>
-<script src="http://res.jian-hu.cn/static/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
-<script src="http://res.jian-hu.cn/static/jquery-weui/dist/js/jquery-weui.js"></script>
-<script src="http://res.jian-hu.cn/static/dist/js/app-mesg.js"></script>
-</body>
-</html>
+{% block tabbar2 %}
+    http://res.jian-hu.cn/static/img/btn_pre_mesaage@2x.png
+{% endblock %}
+
+{% block parent_script %}
+{% endblock %}
+

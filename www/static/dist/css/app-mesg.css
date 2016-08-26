@@ -1,31 +1,3 @@
-html, body {
-    height: 100%;
-    background-color: #fbf9fe;
-    /*overflow-x:hidden;*/
-}
-
-.jian-item-space{
-    background-color: #ebebeb; 
-    width:100%;
-    height: 10px
-}
-
-
-.jian-title{
-    position: fixed;
-    height: 45px;
-    top: 0;
-    right: 0;
-    left: 0;
-    background-color: #ff9600;
-}
-.jian-tabbar-item{
-    width: 36px;
-    height:36px;
-    margin: 6px auto
-}
-
-
 
 .jian-chat-item{
     padding: 8px 12px;

@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-import datetime, time
-
+import json, time
+from wx_base import WxPayConf_pub
+from user.models import Bind, Profile, ProfileExt
+from wx_base.backends.dj import Helper
+from django.http import HttpResponse
 
 def str_to_int(str, default=0):
 	try:
@@ -42,6 +45,25 @@ def format_time(time_data):
 
 	else:
 		return "%d秒前" % seconds
+
+
+def get_jsApi(request):
+	url = "http://" + request.get_host() + request.get_full_path()
+	sign = Helper.jsapi_sign(url)
+	sign["appId"] = WxPayConf_pub.APPID
+	return json.dumps(sign)
+
+
+def get_userinfo(profile):
+	userinfo = {}
+	userinfo['nick'] = profile.real_name
+	userinfo['portrait'] = profile.portrait
+	userinfo['user_company'] = profile.company_name
+	userinfo['user_title'] = profile.title
+	userinfo['user_desc'] = profile.desc
+
+	userinfo['user_city'] = profile.city
+	return userinfo
 
 
 if __name__ == '__main__':
